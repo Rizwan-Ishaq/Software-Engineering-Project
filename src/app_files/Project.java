@@ -2,8 +2,6 @@ package app_files;
 
 import java.time.*;
 
-import acceptance_tests.test;
-
 public class Project {
 	
 	private String name;
