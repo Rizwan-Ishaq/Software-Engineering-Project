@@ -1,4 +1,4 @@
-Feature: User login
+Feature: User login 
 	Description: Resource wants to login
 	Actors: Resource
 
