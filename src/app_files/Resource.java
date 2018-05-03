@@ -4,20 +4,14 @@ public class Resource {
 	
 	private String id;
 	private String fullName;
+	private String password;
 	private boolean available;
 	
-	public Resource(String initials, String fullName) {
+	public Resource(String fullName, String initials, String password) {
 		this.id = initials;
-		this.setFullName(fullName);
+		this.fullName = fullName;
+		this.password = password;
 		this.available = true; 
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public boolean isAvailable() {
@@ -34,5 +28,21 @@ public class Resource {
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

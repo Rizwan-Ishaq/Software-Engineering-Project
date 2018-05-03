@@ -12,4 +12,13 @@ public class TimeRegApp {
 	public boolean userLoggedIn() {
 		return userLoggedIn;
 	}
+
+	public void registerResource(Resource resource) throws Exception {
+		if (resources.contains(resource)) {
+			throw new Exception("User is already registered");
+		}
+		resources.add(resource);		
+	}
+	
+	
 }

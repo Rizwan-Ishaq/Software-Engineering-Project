@@ -15,3 +15,4 @@ Scenario: Resource has the wrong password
 	And the password is "wrong password"
 	Then the resource login fails
 	And the resource is not logged in
+	And we get the error message "Wrong Password"
