@@ -1,4 +1,4 @@
-Feature: Create user login
+Feature: Create user login 
 	Description: Resource wants to create a user
 	Actors: Resource
 

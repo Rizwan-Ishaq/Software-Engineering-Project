@@ -1,7 +1,7 @@
 package app_files;
 
 public class Resource {
-	//
+	
 	private String id;
 	private String fullName;
 	private String password;
