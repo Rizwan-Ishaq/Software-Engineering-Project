@@ -5,7 +5,7 @@ Feature: Create user login
 Scenario: Resource wants to create a user login
 	Given that the resource selected to create a user
 	And there is a resource "Rizwan Ali Ishaq", with id "RAI" and password "lyngby"
-	When the user is created 
+	When the user is created
 	Then the user for the resource "Rizwan Ali Ishaq", with id "RAI" and password "lyngby" is created
 
 Scenario: Resource is already an existing user  

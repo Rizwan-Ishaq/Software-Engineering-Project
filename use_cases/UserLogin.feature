@@ -3,7 +3,7 @@ Feature: User login
 	Actors: Resource
 
 Scenario: Resource can login
-	Given that the resource selected to login 
+	Given that the resource selected to login
 	And that the resource "RAI" is not logged in
 	And the password is "lyngby"
 	Then the "RAI" login succeeds
