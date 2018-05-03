@@ -10,7 +10,7 @@ Scenario: Resource can login
 	And the user is logged in
 
 Scenario: Resource has the wrong password
-	Given that the resource selected to login 
+	Given that the resource selected to login
 	And that the resource "RAI" is not logged in
 	And the password is "wrong password"
 	Then the resource login fails

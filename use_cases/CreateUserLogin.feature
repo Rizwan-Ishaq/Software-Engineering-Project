@@ -8,7 +8,7 @@ Scenario: Resource wants to create a user login
 	When the user is created
 	Then the user for the resource "Rizwan Ali Ishaq", with id "RAI" and password "lyngby" is created
 
-Scenario: Resource is already an existing user  
+Scenario: Resource is already an existing user 
 	Given that the resource selected to create a user
 	And the resource "Rizwan Ali Ishaq", with id "RAI" and password "lyngby" is already a user
 	When the user is created

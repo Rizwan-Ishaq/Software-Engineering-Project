@@ -2,7 +2,7 @@ package app_files;
 
 import java.util.ArrayList;
 import java.util.List;
-//
+
 public class TimeRegApp {
 
 	private boolean userLoggedIn = false;
