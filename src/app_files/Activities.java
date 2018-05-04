@@ -34,7 +34,5 @@ public class Activities {
 
 	public void setEndTime(int endTime) {
 		this.endTime = endTime;
-	}
-	
-	
+	}	
 }

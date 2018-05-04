@@ -8,6 +8,7 @@ public class TimeRegApp {
 	private boolean userLoggedIn = false;
 	private List<Resource> resources = new ArrayList<>();
 	private List<Project> project = new ArrayList<>();
+	private List<Activities> activities = new ArrayList<>();
 	
 	public boolean userLoggedIn() {
 		return userLoggedIn;
@@ -17,8 +18,8 @@ public class TimeRegApp {
 		if (resources.contains(resource)) {
 			throw new Exception("User is already registered");
 		}
+		
 		resources.add(resource);		
 	}
-	
 	
 }
