@@ -3,11 +3,15 @@ package app_files;
 import java.util.ArrayList;
 import java.util.List;
 
+import dtu.library.app.Book;
+import dtu.library.app.OperationNotAllowedException;
+
 public class TimeRegApp {
 
 	private boolean userLoggedIn = false;
 	private List<Resource> resources = new ArrayList<>();
 	private List<Project> project = new ArrayList<>();
+	private List<WorkPlanned> workplanned = new ArrayList<>();
 	
 	public boolean userLoggedIn() {
 		return userLoggedIn;
@@ -18,6 +22,10 @@ public class TimeRegApp {
 			throw new Exception("User is already registered");
 		}
 		resources.add(resource);		
+	}
+	
+	public void addWorkPlanned(WorkPlanned WorkPlanned) {
+		workplanned.add(WorkPlanned);
 	}
 	
 	
