@@ -2,14 +2,24 @@ package app_files;
 
 public class Activities {
 	
+	private int id;
 	private int totalTime;
 	private int startTime;
-	private int endTime;
+	private int endTime; 
 	
-	public void Activity(int totalTime, int startTime, int endTime) {
+	public void Activity(int id, int totalTime, int startTime, int endTime) {
 		this.totalTime = totalTime;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getTotalTime() {
