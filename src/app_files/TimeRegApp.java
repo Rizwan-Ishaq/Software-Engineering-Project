@@ -3,8 +3,6 @@ package app_files;
 import java.util.ArrayList;
 import java.util.List;
 
-import dtu.library.app.Book;
-import dtu.library.app.OperationNotAllowedException;
 
 public class TimeRegApp {
 
