@@ -22,7 +22,8 @@ public class PasswordScreen extends Screen {
 		Resource correctUser = timeRegApp.getResources().get(timeRegApp.getIndexUsername());
 		
 		if(input.equals(correctUser.getPassword())) {
-			timeRegUI.setScreen(new MainMenu());			
+			timeRegApp.userLoggedIn = true;
+			timeRegUI.setScreen(new MainMenu());
 		} else {
 			out.print("Wrong Password");
 			timeRegUI.setScreen(new StartScreen());

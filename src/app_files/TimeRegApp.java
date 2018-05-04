@@ -5,21 +5,14 @@ import java.util.List;
 
 public class TimeRegApp {
 
-	private boolean userLoggedIn = false;
+	public boolean userLoggedIn = false;
 	private List<Resource> resources = new ArrayList<>();
-	private List<Project> project = new ArrayList<>();
+	private List<Project> projects = new ArrayList<>();
 	private List<WorkPlanned> workplanned = new ArrayList<>();
 	public int indexUsername;
 	
 	public boolean userLoggedIn() {
 		return userLoggedIn;
-	}
-
-	public void registerResource(Resource resource) throws Exception {
-		if (resources.contains(resource)) {
-			throw new Exception("User is already registered");
-		}
-		resources.add(resource);		
 	}
 	
 	public void addWorkPlanned(WorkPlanned WorkPlanned) {
@@ -32,5 +25,9 @@ public class TimeRegApp {
 	
 	public int getIndexUsername() {
 		return indexUsername;
+	}
+	
+	public void addResource(Resource newUser) {
+		resources.add(newUser);
 	}
 }

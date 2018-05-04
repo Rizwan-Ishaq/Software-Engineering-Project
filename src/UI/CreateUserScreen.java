@@ -33,6 +33,7 @@ public class CreateUserScreen extends Screen {
 			} else {
 				Resource newUser = new Resource(inputName[0],inputName[1],inputName[2]);
 				out.println("User succesfully created. You can now login");
+				timeRegApp.addResource(newUser);
 				timeRegUI.setScreen(new InitialsScreen());
 			}
 		}
