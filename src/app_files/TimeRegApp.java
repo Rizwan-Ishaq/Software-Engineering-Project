@@ -3,15 +3,13 @@ package app_files;
 import java.util.ArrayList;
 import java.util.List;
 
-import dtu.library.app.Book;
-import dtu.library.app.OperationNotAllowedException;
-
 public class TimeRegApp {
 
 	private boolean userLoggedIn = false;
 	private List<Resource> resources = new ArrayList<>();
 	private List<Project> project = new ArrayList<>();
 	private List<WorkPlanned> workplanned = new ArrayList<>();
+	public int indexUsername;
 	
 	public boolean userLoggedIn() {
 		return userLoggedIn;
@@ -28,5 +26,11 @@ public class TimeRegApp {
 		workplanned.add(WorkPlanned);
 	}
 	
+	public List<Resource> getResources() {
+		return resources;
+	}
 	
+	public int getIndexUsername() {
+		return indexUsername;
+	}
 }
