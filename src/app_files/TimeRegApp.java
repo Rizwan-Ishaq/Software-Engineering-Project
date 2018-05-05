@@ -20,10 +20,10 @@ public class TimeRegApp {
 	}
 
 	public void registerResource(Resource resource) throws Exception {
-		if (resources.contains(resource)) {
+		if (resourcelist.contains(resource)) {
 			throw new Exception("User is already registered");
 		}
-		resources.add(resource);
+		resourcelist.add(resource);
 	}
 
 	// StefanAndersen Test
