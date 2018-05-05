@@ -1,22 +1,26 @@
-Feature: Add WorkPlanned
-	Description: Should be able to add WorkPlanned to the list over Planned work
+Feature: Prooving that my framework workds
+	Description: A feature to test that I can create something
 	
-	In order to pair up a activity
-	to a project
-	With a set start
-	and end time
-	I want to be able to
-	add id of project
-	add id of activity
-	and timeframe
-	and it's added to a list over planned work
+	I want to test that my framework works
+	by creating a project and activity
+	and creating a Workplanned with a start and end time
 	
-Scenario: PlannedWork object with legal input
-	Given I have a plannedWork object
-	And parameters are legal
-	Then it should be added to plannedWork list
+Scenario: Adding Planned work
+	Given a resource with fullName Stefan
+	and initials SSA
+	and password hello exists
+	
+	public Resource(String fullName, String initials, String password) {
+		this.id = initials;
+		this.fullName = fullName;
+		this.password = password;
+		this.available = true; 
+	}
 
-Scenario: plannedWork object with illegal input
-	Given I have a plannedWork object
-	and parameters are illegal
-	then exception should be thrown
+
+
+Scenario: User borrows book
+	Given a book with signature "Beck99" is in the library
+	And a user is registered with the library
+	When the user borrows the book
+	Then the book is borrowed by the user

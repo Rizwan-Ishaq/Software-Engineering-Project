@@ -23,23 +23,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/mohra/.m2/repository/io/cucumber/cucumber-core/2.3.1/cucumber-core-2.3.1.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="io.cucumber"/>
-			<attribute name="maven.artifactId" value="cucumber-core"/>
-			<attribute name="maven.version" value="2.3.1"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/mohra/.m2/repository/io/cucumber/cucumber-java/2.3.1/cucumber-java-2.3.1.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="io.cucumber"/>
-			<attribute name="maven.artifactId" value="cucumber-java"/>
-			<attribute name="maven.version" value="2.3.1"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="Exceptions/GenericException.java"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
