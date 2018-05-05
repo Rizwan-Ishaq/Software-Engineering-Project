@@ -15,7 +15,6 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import dtu.library.domain.User;
 import app_files.Resource;
 import app_files.TimeRegApp;
 
@@ -63,7 +62,7 @@ public class LoginSteps {
 	
 	@Given("^the resource \"([^\"]*)\", with id \"([^\"]*)\" and password \"([^\"]*)\" is already a user$")
 	public void theResourceWithIdAndPasswordIsAlreadyAUser(String arg1, String arg2, String arg3) throws Exception {
-	    // Write code here that turns the phrase above into concrete actions
+	    
 	    throw new PendingException();
 	}
 	
