@@ -46,7 +46,7 @@ public class TimeRegUI {
 		return exit;
 	}
 
-	void setScreen(Screen screen) {
+	public void setScreen(Screen screen) {
 		this.screen = screen;
 		this.screen.setTimeRegUI(this);	
 	}

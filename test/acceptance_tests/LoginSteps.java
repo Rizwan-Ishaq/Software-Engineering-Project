@@ -6,15 +6,22 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Optional;
+
+import UI.InitialsScreen;
+import UI.StartScreen;
+import UI.TimeRegUI;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import dtu.library.domain.User;
 import app_files.Resource;
 import app_files.TimeRegApp;
 
 public class LoginSteps {
 	
+	private TimeRegUI timeRegUI;
 	private TimeRegApp timeRegApp;
 	private Resource resource;
 	
@@ -25,7 +32,8 @@ public class LoginSteps {
 
 	@Given("^that the resource selected to create a user$")
 	public void thatTheResourceSelectedToCreateAUser() throws Exception {
-		
+		timeRegUI.setScreen(new StartScreen());
+		timeRegUI.processInput("0", null);
 		throw new PendingException();
 	}
 	
@@ -41,14 +49,15 @@ public class LoginSteps {
 	@When("^the user is created$")
 	public void theUserIsCreated() throws Exception {
 		try {
-			timeRegApp.registerResource(resource);
+			timeRegApp.addResource(resource);
 		} catch (Exception e) { }
 	    throw new PendingException();
 	}
 	
 	@Then("^the user for the resource \"([^\"]*)\", with id \"([^\"]*)\" and password \"([^\"]*)\" is created$")
-	public void theUserForTheResourceWithIdAndPasswordIsCreated(String arg1, String arg2, String arg3) throws Exception {
-	    
+	public void theUserForTheResourceWithIdAndPasswordIsCreated(String fullName, String initials, String password) throws Exception {
+		int index = timeRegApp.getResources().indexOf(resource);
+		timeRegApp.getResources().get(index);
 	    throw new PendingException();
 	}
 	
