@@ -1,6 +1,3 @@
-//Stefan Siggaard Andersen || Kayaba Akihiko || Day Date Month year
-//DTU Student ID S144230
-//Instructor: Professor Paul Fischer
 package UI;
 
 import java.io.IOException;
@@ -10,9 +7,20 @@ public class StartScreen extends Screen {
 
 	@Override
 	public void printScreen(PrintWriter out) throws IOException {
-		out.println("0) Login");
-		out.println("1) Create user");
-		out.println("2) Exit the program");
+		out.println("TimeReg application menu");
+		out.println("Commands, <> specifies input parameters, do not use space within a single parameter:");
+		out.println("AddProject <ProjectName>]                                                          (-> OK, ProjectID)");
+		out.println("ListProjects                                                                       (-> Nx ProjectName, ProjectID)");
+		out.println("AddActivity <ProjectId> <ActivityName>                                             (-> OK)");
+		out.println("ListActivities                                                                     (-> Nx ProjectId, ActivityName)");
+		out.println("ListActivitiesForProject <ProjectId>                                               (-> Nx ActivityName)");
+		out.println("AddWorkPlanned <ProjectId> <ActivityName> <ResourceInitials> <StartWeek> <EndWeek> (-> OK)");
+		out.println("ListWorkPlanned                                                                    (-> Nx ProjectId, ActivityName, ResourceInitials, FromWeek, ToWeek");
+		out.println("ListWorkPlannedForProject <ProjectId>                                              (-> Nx ProjectId, ActivityName, ResourceInitials, FromWeek, ToWeek");
+		out.println("ListWorkPlannedForResource <ResourceInitials>                                      (-> Nx ProjectId, ActivityName, ResourceInitials, FromWeek, ToWeek");        System.out.println("Implemented for testing. Not all commands implemented");
+		out.println("Exit");
+		out.println("Enter Command:");
+		
 	}
 	
 	@Override
