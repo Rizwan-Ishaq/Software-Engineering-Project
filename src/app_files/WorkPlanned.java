@@ -12,20 +12,13 @@ public class WorkPlanned {
 	private String projectId;
 	private int startWeek;
 	private int endWeek;
-	private int resourceId;
+	private String resourceId;
 
 	public WorkPlanned(TimeRegApp timeRegApp, String projectId, String activityId, int startWeek, int endWeek,
-			int resourceId) {
+			String resourceId) {
 
 		this.timeRegApp = timeRegApp;
 		// ----------------------------
-		
-		Project project = timeRegApp.getProject(projectId);
-	
-		if (project.equals(null)) {
-			
-			throw new IllegalArgumentException("Project doesn't exist.");
-		}
 
 		this.projectId = projectId;
 		this.activityId = activityId;
@@ -50,7 +43,7 @@ public class WorkPlanned {
 		return endWeek;
 	}
 
-	public int getResourceId() {
+	public String getResourceId() {
 		return resourceId;
 	}
 
