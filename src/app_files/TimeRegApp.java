@@ -11,10 +11,10 @@ public class TimeRegApp {
 	public List<Project> projectlist = new ArrayList<>();
 	public List<WorkPlanned> workplannedlist = new ArrayList<>();
 	public List<Activity> activitylist = new ArrayList<>();
-	
+
 	public List getActivityList() {
-        return activitylist;
-    }
+		return activitylist;
+	}
 
 	// testpurposes
 	Boolean standAloneTest = false;
@@ -32,48 +32,57 @@ public class TimeRegApp {
 
 	// StefanAndersen Test
 	/*
-	public void whatever() {
-
-		WorkPlanned work1 = new WorkPlanned(this, "hej", "med", 15, 17, 1);
-		WorkPlanned work2 = new WorkPlanned(this, "ohhhboy", "awwjeez", 14, 19, 99941);
-
-		TimeRegApp fjols = new TimeRegApp();
-		fjols.addWorkPlanned(work1);
-		fjols.addWorkPlanned(work2);
-		fjols.printList();
-	}
-	*/
+	 * public void whatever() {
+	 * 
+	 * WorkPlanned work1 = new WorkPlanned(this, "hej", "med", 15, 17, 1);
+	 * WorkPlanned work2 = new WorkPlanned(this, "ohhhboy", "awwjeez", 14, 19,
+	 * 99941);
+	 * 
+	 * TimeRegApp fjols = new TimeRegApp(); fjols.addWorkPlanned(work1);
+	 * fjols.addWorkPlanned(work2); fjols.printList(); }
+	 */
 
 	// StefanAndersen
 	public void addWorkPlanned(WorkPlanned WorkPlanned) {
-		System.out.println("I'mhere");
 		// Check of parameter legality
 		if (getProject(WorkPlanned.getProjectId()) == null) {
 
-			throw new IllegalArgumentException("Project doesn't exist.");
+			System.out.println("ERROR: Project does not exist");
+			
+			return;
+			// throw new IllegalArgumentException("Project doesn't exist.");
 		}
 
 		if (getActivity(WorkPlanned.getProjectId(), WorkPlanned.getActivityId()) == null) {
 
-			throw new IllegalArgumentException("Activity doesn't exist.");
+			System.out.println("ERROR: Activity does not exist");
+			
+			return;
+			// throw new IllegalArgumentException("Activity doesn't exist.");
 		}
 
 		if (getResource(WorkPlanned.getResourceId()) == null) {
 
-			throw new IllegalArgumentException("Employee doesn't exist.");
+			System.out.println("ERROR: Resource does not exist. ");
+			
+			return;
+			// throw new IllegalArgumentException("Employee doesn't exist.");
 		}
 
 		// Check if resource is booked for the time being
-		// If end time is before start time, and it's true that start time is after end time of comparable then resource is free.
+		// If end time is before start time, and it's true that start time is after end
+		// time of comparable then resource is free.
 		// written as NOT
 		Boolean resourceAvailable = true;
 
 		for (int i = 0; i < workplannedlist.size(); i++) {
-			if (WorkPlanned.getResourceId() == workplannedlist.get(i).getResourceId()) {
-				if (!(WorkPlanned.getEndWeek() < workplannedlist.get(i).getStartWeek())
-						&& !(WorkPlanned.getStartWeek() > workplannedlist.get(i).getEndWeek())) {
+			if (WorkPlanned.getResourceId().equals(workplannedlist.get(i).getResourceId())) {
+				if (!(WorkPlanned.getEndWeek() < workplannedlist.get(i).getStartWeek()
+						|| WorkPlanned.getStartWeek() > workplannedlist.get(i).getEndWeek())) {
 
 					resourceAvailable = false;
+					System.out.println(
+							"ERROR: Resource is not available in the given timeframe, and WorkPlanned will not be added.");
 
 				}
 
@@ -90,12 +99,12 @@ public class TimeRegApp {
 	public void addActivity(Activity Activity) {
 		activitylist.add(Activity);
 	}
-	
+
 	// StefanAndersen
 	public void addProject(Project Project) {
 		projectlist.add(Project);
 	}
-	
+
 	public void addResource(Resource Resource) {
 		resourcelist.add(Resource);
 	}
@@ -108,10 +117,9 @@ public class TimeRegApp {
 	// StefanAndersen
 	public Project getProject(String projectId) {
 		// Method returns project object if exists or else Null
-		System.out.println("I'm also here");
+		System.out.println("x004");
 
-		if (standAloneTest = true) {
-
+		if (standAloneTest) {
 			if (projectId.substring(0, 1).equals("A")) {
 				return null;
 			} else {
@@ -120,8 +128,8 @@ public class TimeRegApp {
 			}
 
 		} else {
-
 			for (int i = 0; i < projectlist.size(); i++) {
+				System.out.println("x003");
 				if (projectlist.get(i).getId().equals(projectId)) {
 					return projectlist.get(i);
 				}
@@ -134,9 +142,9 @@ public class TimeRegApp {
 
 	public Activity getActivity(String projectId, String activityId) {
 
-		if (standAloneTest = true) {
+		if (standAloneTest) {
 
-			if (activityId.substring(0, 1) == "A") {
+			if (activityId.substring(0, 1).equals("A")) {
 				return null;
 			} else {
 				Activity activity = new Activity("Testesttest", "Tsettsettsettset", 100, 3, 5);
@@ -144,8 +152,9 @@ public class TimeRegApp {
 			}
 
 		} else {
-
+			System.out.println("x001 " + projectId + " " + activityId);
 			for (int i = 0; i < activitylist.size(); i++) {
+				System.out.println(activitylist.get(i).getActId() + " " + activitylist.get(i).getProjId());
 				if (activitylist.get(i).getActId().equals(activityId)
 						&& activitylist.get(i).getProjId().equals(projectId)) {
 					return activitylist.get(i);
@@ -157,9 +166,9 @@ public class TimeRegApp {
 
 	public Resource getResource(String resourceId) {
 
-		if (standAloneTest = true) {
+		if (standAloneTest) {
 
-			if (resourceId.substring(0, 1) == "A") {
+			if (resourceId.substring(0, 1).equals("A")) {
 				return null;
 			} else {
 				Resource resource = new Resource("StefanAndersen", "SSA", "hubert");

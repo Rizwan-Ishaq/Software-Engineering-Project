@@ -11,10 +11,10 @@ public class Activity {
 	private int startWeek;
 	private int endWeek;
 
-	public Activity(String actId, String projId, int budgetHours, int startWeek, int endWeek) {
+	public Activity(String projId, String actId, int budgetHours, int startWeek, int endWeek) {
 
-		this.actId = actId;
 		this.projId = projId;
+		this.actId = actId;
 		this.budgetHours = budgetHours;
 		this.startWeek = startWeek;
 		this.endWeek = endWeek;
