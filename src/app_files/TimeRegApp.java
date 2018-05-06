@@ -44,7 +44,7 @@ public class TimeRegApp {
 	 * fjols.addWorkPlanned(work2); fjols.printList(); }
 	 */
 
-	// StefanAndersen
+	// StefanAndersen FirstRealImplementedMethodOfProject
 	public String addWorkPlanned(WorkPlanned WorkPlanned) {
 		// Check of parameter legality
 		if (getProject(WorkPlanned.getProjectId()) == null) { // wbt 010
