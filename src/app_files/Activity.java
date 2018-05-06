@@ -29,7 +29,7 @@ public class Activity {
 		return this.projId;
 	}
 	
-	public int getBudgetHours() {
+/*	public int getBudgetHours() {
 		return this.budgetHours;
 	}
 	
@@ -39,6 +39,6 @@ public class Activity {
 	
 	public int getEndWeek() {
 		return this.endWeek;
-	}
+	} */
 
 }

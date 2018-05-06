@@ -2,6 +2,7 @@ package acceptance_tests;
 
 import static org.junit.Assert.assertEquals;
 
+
 import app_files.Activity;
 import app_files.Project;
 import app_files.Resource;
