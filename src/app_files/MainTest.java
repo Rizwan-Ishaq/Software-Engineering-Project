@@ -5,14 +5,14 @@ package app_files;
 
 
 //StefanAndersen for test purposes
-public class MainTest {
-
-	public static void main(String[] args) {
-		System.out.println("begin");
-		
-		TimeRegApp fjols = new TimeRegApp();
-		fjols.whatever();
-		
-		System.out.println("Done");
-	}
-}
+//public class MainTest {
+//
+//	public static void main(String[] args) {
+//		System.out.println("begin");
+//		
+//		TimeRegApp fjols = new TimeRegApp();
+//		fjols.whatever();
+//		
+//		System.out.println("Done");
+//	}
+//}

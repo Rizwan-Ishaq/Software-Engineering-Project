@@ -23,7 +23,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/Kayaba Akihiko/.m2/repository/io/cucumber/cucumber-core/2.3.1/cucumber-core-2.3.1.jar">
+	<classpathentry kind="lib" path="C:/Users/rizwa/.m2/repository/io/cucumber/cucumber-core/2.3.1/cucumber-core-2.3.1.jar">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="maven.groupId" value="io.cucumber"/>
@@ -32,7 +32,7 @@
 			<attribute name="maven.scope" value="compile"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Kayaba Akihiko/.m2/repository/io/cucumber/cucumber-java/2.3.1/cucumber-java-2.3.1.jar">
+	<classpathentry kind="lib" path="C:/Users/rizwa/.m2/repository/io/cucumber/cucumber-java/2.3.1/cucumber-java-2.3.1.jar">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="maven.groupId" value="io.cucumber"/>

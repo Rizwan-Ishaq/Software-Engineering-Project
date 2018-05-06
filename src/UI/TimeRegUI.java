@@ -13,28 +13,17 @@ public class TimeRegUI {
 
 
 	public static void main(String[] args) throws IOException {
-
-		
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		PrintWriter out = new PrintWriter(System.out, true);
 		TimeRegUI ui = new TimeRegUI();
 		ui.basicLoop(in, out);
 		System.out.println("byeeee");
 	}
-	
+		
 	public TimeRegUI() {
 		setScreen(new StartScreen());
 	}
 	
-	
-	TimeRegApp getTimeRegApp() {
-        return timeRegApp;
-    }
-
-	public void printMenu(PrintWriter out) throws IOException {
-		getScreen().printScreen(out);
-	}
-
 	public void basicLoop(BufferedReader in, PrintWriter out) throws IOException {
 		String selection;
 		do {
@@ -45,6 +34,14 @@ public class TimeRegUI {
 
 	public String readInput(BufferedReader in) throws IOException {
 		return getScreen().readInput(in);
+	}
+
+	TimeRegApp getTimeRegApp() {
+		return timeRegApp;
+	}
+	
+	public void printMenu(PrintWriter out) throws IOException {
+		getScreen().printScreen(out);
 	}
 
 	public boolean processInput(String input, PrintWriter out) throws IOException {

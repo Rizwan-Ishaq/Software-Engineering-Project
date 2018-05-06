@@ -15,10 +15,10 @@ public class StartScreen extends Screen {
 	public void printScreen(PrintWriter out) throws IOException {
 		out.println("TimeReg application menu");
 		out.println("Commands, <> specifies input parameters, do not use space within a single parameter:");
-		out.println("Login");
+		out.println("Login <Initials> <Password>													(-> OK)");
 		out.println("CreateUser");
 		out.println(
-				"AddProject <ProjectName>]                                                          (-> OK, ProjectID)");
+				"AddProject <ProjectName>                                                           (-> OK, ProjectID)");
 		out.println(
 				"ListProjects                                                                       (-> Nx ProjectName, ProjectID)");
 		out.println("AddActivity <ProjectId> <ActivityName> <BudgetHours> <startWeek> <endWeek>     (-> OK)");
@@ -52,109 +52,121 @@ public class StartScreen extends Screen {
 		String command = Tokens[0];
 		System.out.println("command =" + command);
 		handled = false;
-
-		if ("AddProject".equals(command)) {
+		
+		if ("Login".equals(command)) {
 			handled = true;
-			String projectName = Tokens[1];
-
-			Project newProject = new Project(projectName);
-
-			timeRegUI.getTimeRegApp().addProject(newProject);
-
-			System.out.println(newProject.getId());
-			System.out.println("Ok");
-		}
-
-		if ("ListProjects".equals(command)) {
-			handled = true;
-
-			for (int i = 0; i < timeRegUI.getTimeRegApp().projectlist.size(); i++) {
-
-				Project currentProject = timeRegUI.getTimeRegApp().projectlist.get(i);
-
-				System.out.println(currentProject.getId() + " " + currentProject.getName());
+			timeRegUI.getTimeRegApp().userLogin(Tokens[1], Tokens[2]);
+			if (timeRegUI.getTimeRegApp().userLoggedIn() == false) {
+				
 			}
 		}
+		
+		
+		if (timeRegUI.getTimeRegApp().userLoggedIn = true) {
 
-		if ("AddActivity".equals(command)) {
-			handled = true;
-			String projectId = Tokens[1];
-			String activityName = Tokens[2];
-			int budgetHours = Integer.parseInt(Tokens[3]);
-			int startWeek = Integer.parseInt(Tokens[4]);
-			int endWeek = Integer.parseInt(Tokens[5]);
-
-			Activity newActivity = new Activity(projectId, activityName, budgetHours, startWeek, endWeek);
-
-			timeRegUI.getTimeRegApp().addActivity(newActivity);
-
-			System.out.println("Ok");
-		}
-
-		if ("ListActivities".equals(command)) {
-			handled = true;
-
-			for (int i = 0; i < timeRegUI.getTimeRegApp().activitylist.size(); i++) {
-
-				Activity currentActivity = timeRegUI.getTimeRegApp().activitylist.get(i);
-
-				System.out.println(currentActivity.getProjId() + " " + currentActivity.getActId());
+			if ("AddProject".equals(command)) {
+				handled = true;
+				String projectName = Tokens[1];
+	
+				Project newProject = new Project(projectName);
+	
+				timeRegUI.getTimeRegApp().addProject(newProject);
+	
+				System.out.println(newProject.getId());
+				System.out.println("Ok");
 			}
-		}
-
-		if ("AddResource".equals(command)) {
-			handled = true;
-			String resourceName = Tokens[1];
-			String resourceInitials = Tokens[2];
-			String resourcePassword = Tokens[3];
-
-			Resource newResource = new Resource(resourceName, resourceInitials, resourcePassword);
-
-			timeRegUI.getTimeRegApp().addResource(newResource);
-
-			System.out.println("Ok");
-		}
-
-		if ("ListResources".equals(command)) {
-			handled = true;
-
-			for (int i = 0; i < timeRegUI.getTimeRegApp().resourcelist.size(); i++) {
-
-				Resource currentResource = timeRegUI.getTimeRegApp().resourcelist.get(i);
-
-				System.out.println(currentResource.getFullName() + " " + currentResource.getId() + " "
-						+ currentResource.getPassword());
+	
+			if ("ListProjects".equals(command)) {
+				handled = true;
+	
+				for (int i = 0; i < timeRegUI.getTimeRegApp().projectlist.size(); i++) {
+	
+					Project currentProject = timeRegUI.getTimeRegApp().projectlist.get(i);
+	
+					System.out.println(currentProject.getId() + " " + currentProject.getName());
+				}
 			}
-		}
-
-		if ("AddWorkPlanned".equals(command)) {
-			handled = true;
-			String projectId = Tokens[1];
-			String activityName = Tokens[2];
-			String resourceInitials = Tokens[3];
-			int StartWeek = Integer.parseInt(Tokens[4]);
-			int EndWeek = Integer.parseInt(Tokens[5]);
-
-			WorkPlanned newWorkPlanned = new WorkPlanned(projectId, activityName, resourceInitials, StartWeek, EndWeek);
-			System.out.println(timeRegUI.getTimeRegApp().addWorkPlanned(newWorkPlanned));
-			// timeRegApp.addWorkPlanned(newWorkPlanned);
-
-			System.out.println("OK");
-		}
-
-		if ("ListWorkPlanned".equals(command)) {
-			handled = true;
-
-			for (int i = 0; i < timeRegUI.getTimeRegApp().workplannedlist.size(); i++) {
-
-				WorkPlanned currentWorkPlanned = timeRegUI.getTimeRegApp().workplannedlist.get(i);
-
-				System.out.println(currentWorkPlanned.getProjectId() + " " + currentWorkPlanned.getActivityId() + " "
-						+ currentWorkPlanned.getResourceId() + " " + currentWorkPlanned.getStartWeek() + " "
-						+ currentWorkPlanned.getEndWeek());
-
+	
+			if ("AddActivity".equals(command)) {
+				handled = true;
+				String projectId = Tokens[1];
+				String activityName = Tokens[2];
+				int budgetHours = Integer.parseInt(Tokens[3]);
+				int startWeek = Integer.parseInt(Tokens[4]);
+				int endWeek = Integer.parseInt(Tokens[5]);
+	
+				Activity newActivity = new Activity(projectId, activityName, budgetHours, startWeek, endWeek);
+	
+				timeRegUI.getTimeRegApp().addActivity(newActivity);
+	
+				System.out.println("Ok");
 			}
-		}
+	
+			if ("ListActivities".equals(command)) {
+				handled = true;
+	
+				for (int i = 0; i < timeRegUI.getTimeRegApp().activitylist.size(); i++) {
+	
+					Activity currentActivity = timeRegUI.getTimeRegApp().activitylist.get(i);
+	
+					System.out.println(currentActivity.getProjId() + " " + currentActivity.getActId());
+				}
+			}
+	
+			if ("AddResource".equals(command)) {
+				handled = true;
+				String resourceName = Tokens[1];
+				String resourceInitials = Tokens[2];
+				String resourcePassword = Tokens[3];
+	
+				Resource newResource = new Resource(resourceName, resourceInitials, resourcePassword);
+	
+				timeRegUI.getTimeRegApp().addResource(newResource);
+	
+				System.out.println("Ok");
+			}
+	
+			if ("ListResources".equals(command)) {
+				handled = true;
+	
+				for (int i = 0; i < timeRegUI.getTimeRegApp().resourcelist.size(); i++) {
+	
+					Resource currentResource = timeRegUI.getTimeRegApp().resourcelist.get(i);
+	
+					System.out.println(currentResource.getFullName() + " " + currentResource.getId() + " "
+							+ currentResource.getPassword());
+				}
+			}
+	
+			if ("AddWorkPlanned".equals(command)) {
+				handled = true;
+				String projectId = Tokens[1];
+				String activityName = Tokens[2];
+				String resourceInitials = Tokens[3];
+				int StartWeek = Integer.parseInt(Tokens[4]);
+				int EndWeek = Integer.parseInt(Tokens[5]);
+	
+				WorkPlanned newWorkPlanned = new WorkPlanned(projectId, activityName, resourceInitials, StartWeek, EndWeek);
+				System.out.println(timeRegUI.getTimeRegApp().addWorkPlanned(newWorkPlanned));
+				// timeRegApp.addWorkPlanned(newWorkPlanned);
+	
+				System.out.println("OK");
+			}
+	
+			if ("ListWorkPlanned".equals(command)) {
+				handled = true;
+	
+				for (int i = 0; i < timeRegUI.getTimeRegApp().workplannedlist.size(); i++) {
+	
+					WorkPlanned currentWorkPlanned = timeRegUI.getTimeRegApp().workplannedlist.get(i);
+	
+					System.out.println(currentWorkPlanned.getProjectId() + " " + currentWorkPlanned.getActivityId() + " "
+							+ currentWorkPlanned.getResourceId() + " " + currentWorkPlanned.getStartWeek() + " "
+							+ currentWorkPlanned.getEndWeek());
+	
+				}
+			}
+		}	
 
 		if ("Exit".equals(command)) {
 			handled = true;

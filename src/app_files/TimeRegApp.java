@@ -8,7 +8,8 @@ import app_files.Project;
 
 public class TimeRegApp {
 
-	private boolean userLoggedIn = false;
+	public boolean userLoggedIn = false;
+	public int indexUsername;
 	public List<Resource> resourcelist = new ArrayList<>();
 	public List<Project> projectlist = new ArrayList<>();
 	public List<WorkPlanned> workplannedlist = new ArrayList<>();
@@ -25,7 +26,8 @@ public class TimeRegApp {
 	public boolean userLoggedIn() {
 		return userLoggedIn;
 	}
-
+	
+	//Author: Rizwan Ali Ishaq
 	public void registerResource(Resource resource) throws Exception {
 		if (resourcelist.contains(resource)) {
 			throw new Exception("User is already registered");
@@ -153,10 +155,8 @@ public class TimeRegApp {
 
 		}
 		return null;
-
 	}
 	
-	//StefanAndersen
 	public Activity getActivity(String projectId, String activityId) {
 
 		if (standAloneTest) {
@@ -180,6 +180,11 @@ public class TimeRegApp {
 			return null;
 		}
 	}
+
+//	public void addWorkPlanned(WorkPlanned WorkPlanned) {
+//		workplannedlist.add(WorkPlanned);
+//	}
+
 
 	//StefanAndersen
 	public Resource getResource(String resourceId) {
@@ -215,4 +220,29 @@ public class TimeRegApp {
 		}
 	}
 
+	public List<Resource> getResources() {
+		return resourcelist;
+	}
+	
+	//Author: Rizwan Ali Ishaq
+	public int getIndexUsername() {
+		return indexUsername;
+	}
+	
+	//Author: Rizwan Ali Ishaq
+	public boolean userLogin(String inputInitials, String inputPassword) {
+		for (Resource resource : resourcelist) {
+			if(inputInitials.equals(resource.getId())) {
+				indexUsername =  getResources().indexOf(resource);
+			} else {
+				userLoggedIn = false;
+			}
+		}
+		
+		if (inputPassword.equals(resourcelist.get(indexUsername).getPassword())) {
+			userLoggedIn = true;
+		}
+		
+		return userLoggedIn();
+	}
 }

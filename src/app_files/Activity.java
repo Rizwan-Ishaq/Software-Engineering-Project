@@ -1,3 +1,4 @@
+
 //Stefan Siggaard Andersen || Kayaba Akihiko || Day Date Month year
 //DTU Student ID S144230
 //Instructor: Professor Paul Fischer
@@ -40,5 +41,4 @@ public class Activity {
 	public int getEndWeek() {
 		return this.endWeek;
 	}
-
 }
