@@ -30,4 +30,9 @@ public class Project {
 	public String getId() {
 		return id;
 	}
+	
+	//Stefan Andersen - For testing purposes
+	public void resetCounter() {
+		idNo = 1;
+	}
 }

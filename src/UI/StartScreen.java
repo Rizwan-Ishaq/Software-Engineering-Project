@@ -136,8 +136,7 @@ public class StartScreen extends Screen {
 			int EndWeek = Integer.parseInt(Tokens[5]);
 
 			WorkPlanned newWorkPlanned = new WorkPlanned(projectId, activityName, resourceInitials, StartWeek, EndWeek);
-
-			timeRegUI.getTimeRegApp().addWorkPlanned(newWorkPlanned);
+			System.out.println(timeRegUI.getTimeRegApp().addWorkPlanned(newWorkPlanned));
 			// timeRegApp.addWorkPlanned(newWorkPlanned);
 
 			System.out.println("OK");

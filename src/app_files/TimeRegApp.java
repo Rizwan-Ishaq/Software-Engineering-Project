@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import app_files.Project;
+
 public class TimeRegApp {
 
 	private boolean userLoggedIn = false;
@@ -43,29 +45,28 @@ public class TimeRegApp {
 	 */
 
 	// StefanAndersen
-	public void addWorkPlanned(WorkPlanned WorkPlanned) {
+	public String addWorkPlanned(WorkPlanned WorkPlanned) {
 		// Check of parameter legality
-		if (getProject(WorkPlanned.getProjectId()) == null) {
+		if (getProject(WorkPlanned.getProjectId()) == null) { // wbt 010
 
-			System.out.println("ERROR: Project does not exist");
-			
-			return;
+			return "Error: Project does not exist";
 			// throw new IllegalArgumentException("Project doesn't exist.");
 		}
 
-		if (getActivity(WorkPlanned.getProjectId(), WorkPlanned.getActivityId()) == null) {
+		if (getActivity(WorkPlanned.getProjectId(), WorkPlanned.getActivityId()) == null) { // wbt 020
 
-			System.out.println("ERROR: Activity does not exist");
-			
-			return;
+			// System.out.println("ERROR: Activity does not exist or isn't assigned to
+			// project");
+
+			return "Error: Activity does not exist or isn't assigned to project";
 			// throw new IllegalArgumentException("Activity doesn't exist.");
 		}
 
-		if (getResource(WorkPlanned.getResourceId()) == null) {
+		if (getResource(WorkPlanned.getResourceId()) == null) { // wbt 030
 
-			System.out.println("ERROR: Resource does not exist. ");
-			
-			return;
+			// System.out.println("ERROR: Resource does not exist. ");
+
+			return "Error: Resource does not exist.";
 			// throw new IllegalArgumentException("Employee doesn't exist.");
 		}
 
@@ -73,25 +74,39 @@ public class TimeRegApp {
 		// If end time is before start time, and it's true that start time is after end
 		// time of comparable then resource is free.
 		// written as NOT
+
+		if (WorkPlanned.getEndWeek() < WorkPlanned.getStartWeek()) { // wbt 040
+
+			System.out.println("ERROR: Your project ends before it starts.");
+
+			return "Error: Your project ends before it starts.";
+		}
+
 		Boolean resourceAvailable = true;
 
-		for (int i = 0; i < workplannedlist.size(); i++) {
-			if (WorkPlanned.getResourceId().equals(workplannedlist.get(i).getResourceId())) {
-				if (!(WorkPlanned.getEndWeek() < workplannedlist.get(i).getStartWeek()
+		for (int i = 0; i < workplannedlist.size(); i++) { // wbt 050
+			if (WorkPlanned.getResourceId().equals(workplannedlist.get(i).getResourceId())) { // wbt 060
+				if (!(WorkPlanned.getEndWeek() < workplannedlist.get(i).getStartWeek() // wbt 070
 						|| WorkPlanned.getStartWeek() > workplannedlist.get(i).getEndWeek())) {
 
 					resourceAvailable = false;
-					System.out.println(
-							"ERROR: Resource is not available in the given timeframe, and WorkPlanned will not be added.");
+					// System.out.println(
+					// "ERROR: Resource is not available in the given timeframe, and WorkPlanned
+					// will not be added.");
+					return "Error: Resource is not available in the given timeframe, end WorkPlanned will not be added";
 
 				}
 
 			}
 		}
 
-		if (resourceAvailable) {
+		if (resourceAvailable) { // wbt 080
+			// System.out.println("Success: Scheduled work has been added for the
+			// resource");
 			workplannedlist.add(WorkPlanned);
+			return "Succes: Scheduled work has been added for the resource";
 		}
+		return "We should've never reached this part of the galaxy lord vader";
 
 	}
 
