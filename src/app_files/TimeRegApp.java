@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TimeRegApp {
 
-	public boolean userLoggedIn = false;
+	public boolean userLoggedIn = true;
 	private List<Resource> resources = new ArrayList<>();
 	private List<Project> projects = new ArrayList<>();
 	private List<WorkPlanned> workplanned = new ArrayList<>();
@@ -29,5 +29,25 @@ public class TimeRegApp {
 	
 	public void addResource(Resource newUser) {
 		resources.add(newUser);
+	}
+	
+	public void addProject(Project newProject) {
+		projects.add(newProject);
+	}
+	
+	public boolean userLogin(String inputInitials, String inputPassword) {
+		for (Resource resource : resources) {
+			if(inputInitials.equals(resource.getId())) {
+				indexUsername =  getResources().indexOf(resource);
+			} else {
+				userLoggedIn = false;
+			}
+		}
+		
+		if (inputPassword.equals(resources.get(indexUsername).getPassword())) {
+			userLoggedIn = true;
+		}
+		
+		return userLoggedIn();
 	}
 }
