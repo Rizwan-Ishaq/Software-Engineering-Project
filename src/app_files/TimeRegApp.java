@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TimeRegApp {
 
-	public boolean userLoggedIn = true;
+	public boolean userLoggedIn = false;
 	private List<Resource> resources = new ArrayList<>();
 	private List<Project> projects = new ArrayList<>();
 	private List<WorkPlanned> workplanned = new ArrayList<>();
