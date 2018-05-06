@@ -16,7 +16,7 @@ public class StartScreen extends Screen {
 		out.println("TimeReg application menu");
 		out.println("Commands, <> specifies input parameters, do not use space within a single parameter:");
 		out.println("Login <Initials> <Password>													(-> OK)");
-		out.println("CreateUser");
+		out.println("CreateUser <FullNameLastName> <Initials> <Password>									(-> OK)");
 		out.println(
 				"AddProject <ProjectName>                                                           (-> OK, ProjectID)");
 		out.println(
@@ -56,13 +56,25 @@ public class StartScreen extends Screen {
 		if ("Login".equals(command)) {
 			handled = true;
 			timeRegUI.getTimeRegApp().userLogin(Tokens[1], Tokens[2]);
-			if (timeRegUI.getTimeRegApp().userLoggedIn() == false) {
-				
+			if (timeRegUI.getTimeRegApp().userLoggedIn == false) {
+				System.out.println("Wrong login information, please try again.");
+			} else if (timeRegUI.getTimeRegApp().userLoggedIn() == true) {
+				System.out.println("Login succeeded, you can now proceed.");
 			}
 		}
 		
+		if ("CreateUser".equals(command)) {
+			handled = true;
+			Resource newUser = new Resource(Tokens[1],Tokens[2],Tokens[3]);
+			try {
+				timeRegUI.getTimeRegApp().registerResource(newUser);
+				System.out.println("User registered");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
 		
-		if (timeRegUI.getTimeRegApp().userLoggedIn = true) {
+		if (timeRegUI.getTimeRegApp().userLoggedIn == true) {
 
 			if ("AddProject".equals(command)) {
 				handled = true;
@@ -121,7 +133,11 @@ public class StartScreen extends Screen {
 	
 				Resource newResource = new Resource(resourceName, resourceInitials, resourcePassword);
 	
-				timeRegUI.getTimeRegApp().addResource(newResource);
+				try {
+					timeRegUI.getTimeRegApp().registerResource(newResource);
+				} catch (Exception e) {
+					System.out.println(e);
+				}
 	
 				System.out.println("Ok");
 			}

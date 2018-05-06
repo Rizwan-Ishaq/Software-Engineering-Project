@@ -39,7 +39,7 @@ public class AddWorkPlannedSteps {
 	@Given("^a resource with fullName \"([^\"]*)\" and initials \"([^\"]*)\" and password \"([^\"]*)\"$")
 	public void aResourceWithFullNameAndInitialsAndPassword(String arg1, String arg2, String arg3) throws Exception {
 		Resource newResource = new Resource(arg1, arg2, arg3);
-		getTimeRegApp().addResource(newResource);
+		getTimeRegApp().registerResource(newResource);
 
 	}
 

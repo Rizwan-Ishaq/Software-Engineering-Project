@@ -29,12 +29,19 @@ public class TimeRegApp {
 	
 	//Author: Rizwan Ali Ishaq
 	public void registerResource(Resource resource) throws Exception {
-		if (resourcelist.contains(resource)) {
-			throw new Exception("User is already registered");
+		boolean userExisting = false;
+		for (Resource currResource : resourcelist) {
+			if(currResource.getId().equals(resource.getId())) {
+				userExisting = true;
+				throw new Exception("User is already registered");
+			}
 		}
-		resourcelist.add(resource);
+		
+		if (userExisting == false) {
+			resourcelist.add(resource);
+		}
 	}
-
+	
 	// StefanAndersen Test
 	/*
 	 * public void whatever() {
@@ -121,10 +128,6 @@ public class TimeRegApp {
 	// StefanAndersen
 	public void addProject(Project Project) {
 		projectlist.add(Project);
-	}
-
-	public void addResource(Resource Resource) {
-		resourcelist.add(Resource);
 	}
 
 	// StefanAndersen
@@ -236,11 +239,14 @@ public class TimeRegApp {
 				indexUsername =  getResources().indexOf(resource);
 			} else {
 				userLoggedIn = false;
+				return userLoggedIn();
 			}
 		}
 		
 		if (inputPassword.equals(resourcelist.get(indexUsername).getPassword())) {
 			userLoggedIn = true;
+		} else {
+			userLoggedIn = false;
 		}
 		
 		return userLoggedIn();
