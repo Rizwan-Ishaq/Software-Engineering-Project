@@ -56,9 +56,17 @@ public class testWorkPlanned {
 
 	public void createTestResource() {
 		Resource newResource = new Resource("Stefan", "SSA", "cocacola");
-		getTimeRegApp().addResource(newResource);
+		try {
+			getTimeRegApp().registerResource(newResource);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		Resource newResource2 = new Resource("Stefan", "ASS", "cocacola");
-		getTimeRegApp().addResource(newResource2);
+		try {
+			getTimeRegApp().registerResource(newResource2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test // test1

@@ -121,10 +121,6 @@ public class TimeRegApp {
 		projectlist.add(Project);
 	}
 
-	public void addResource(Resource Resource) {
-		resourcelist.add(Resource);
-	}
-
 	// StefanAndersen
 	public List<WorkPlanned> getListofWorkPlanned() {
 		return Collections.unmodifiableList(workplannedlist);
@@ -203,16 +199,6 @@ public class TimeRegApp {
 		}
 		return null;
 
-	}
-
-	// StefanAndersen
-	public void printList() {
-		for (int i = 0; i < workplannedlist.size(); i++) {
-			WorkPlanned work = workplannedlist.get(i);
-			System.out.print(work.getActivityId() + " " + work.getProjectId() + " " + work.getStartWeek() + " "
-					+ work.getEndWeek());
-			System.out.println();
-		}
 	}
 
 }
