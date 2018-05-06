@@ -22,28 +22,42 @@ public class LoginSteps {
 	
 //	private TimeRegUI timeRegUI;
 	private TimeRegApp timeRegApp;
-	private Resource resource;
-	private String inputName;
+//	private String inputName;
 	private String inputInitials;
 	private String inputPassword;
+	private Resource resource;
+	//private Resource testResource = new Resource("Rizwan Ali Ishaq", "RAI", "lyngby123");
 	
-	private Resource testResource = new Resource("Rizwan Ali Ishaq", "RAI", "lyngby123");
 	
-	public LoginSteps(TimeRegApp timeRegApp) {
+	private ErrorMessageHolder errorMessageHolder;
+	
+	public LoginSteps(TimeRegApp timeRegApp, ErrorMessageHolder errorMessageHolder) {
 		this.timeRegApp = timeRegApp;
+		this.errorMessageHolder = errorMessageHolder;
 	}
 	
-	
+	@Given("^the resource \"([^\"]*)\", with id \"([^\"]*)\" and password \"([^\"]*)\" wants to login$")
+	public void theResourceWithIdAndPasswordWantsToLogin(String name, String initials, String password) throws Exception {
+		resource = new Resource(name,initials,password);
+		assertThat(resource.getFullName(),is(equalTo(name)));
+		assertThat(resource.getId(),is(equalTo(initials)));
+		assertThat(resource.getPassword(),is(equalTo(password)));
+		try {
+	    	timeRegApp.registerResource(resource);
+	    } catch (Exception e) {
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
+	}
 	
 	@Given("^that the resource is not logged in$")
 	public void thatTheResourceIsNotLoggedIn() throws Exception {
-		timeRegApp.addResource(testResource);
+		timeRegApp.userLoggedIn = false;
 		assertFalse(timeRegApp.userLoggedIn());
 	}
 
 	@Given("^the resources initials are \"([^\"]*)\" and the password is \"([^\"]*)\"$")
-	public void theResourcesInitialsAreAndThePasswordIs(String intials, String password) throws Exception {
-		this.inputInitials = intials;
+	public void theResourcesInitialsAreAndThePasswordIs(String initials, String password) throws Exception {
+		this.inputInitials = initials;
 		this.inputPassword = password;
 	}
 
@@ -67,46 +81,49 @@ public class LoginSteps {
 	     assertFalse(timeRegApp.userLoggedIn());
 	}
 	
-	//////////
-	
 	@Given("^there is a resource \"([^\"]*)\", with id \"([^\"]*)\" and password \"([^\"]*)\"$")
 	public void thereIsAResourceWithIdAndPassword(String name, String initials, String password ) throws Exception {
 		resource = new Resource(name,initials,password);
 		assertThat(resource.getFullName(),is(equalTo(name)));
 		assertThat(resource.getId(),is(equalTo(initials)));
 		assertThat(resource.getPassword(),is(equalTo(password)));
-		
-//	    this.inputName = name;
-//	    this.inputInitials = initials;
-//	    this.inputPassword = password;
 	}
 
 	@When("^the user is created(?: again|)$")
 	public void theUserIsCreated() throws Exception {
 	    try {
-	    	timeRegApp
-	    } catch {
-	    	
+	    	timeRegApp.registerResource(resource);
+	    } catch (Exception e) {
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
 	    }
 	}
 
 	@Then("^the user for the resource \"([^\"]*)\", with id \"([^\"]*)\" and password \"([^\"]*)\" is created$")
 	public void theUserForTheResourceWithIdAndPasswordIsCreated(String arg1, String arg2, String arg3) throws Exception {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	    assertTrue(timeRegApp.getResources().contains(resource));
 	}
 
-	@Given("^the resource is already a user$")
-	public void theResourceIsAlreadyAUser() throws Exception {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	@Given("^that the resource \"([^\"]*)\", with id \"([^\"]*)\" and password \"([^\"]*)\" is already a user$")
+	public void thatTheResourceWithIdAndPasswordIsAlreadyAUser(String name, String initials, String password) throws Exception {
+		resource = new Resource(name,initials,password);
+		assertThat(resource.getFullName(),is(equalTo(name)));
+		assertThat(resource.getId(),is(equalTo(initials)));
+		assertThat(resource.getPassword(),is(equalTo(password)));
+		try {
+	    	timeRegApp.registerResource(resource);
+
+	    } catch (Exception e) {
+	    	errorMessageHolder.setErrorMessage(e.getMessage());
+	    }
+	    timeRegApp.userLogin(resource.getId(), resource.getPassword());
+	    assertTrue(timeRegApp.userLoggedIn());
+	}
+	
+	@Then("^we get the error message \"([^\"]*)\"$")
+	public void weGetTheErrorMessage(String errorMessage) throws Exception {
+		assertThat(errorMessageHolder.getErrorMessage(),is(equalTo(errorMessage)));
 	}
 
-	@When("^the resource tries to create a user again$")
-	public void theResourceTriesToCreateAUserAgain() throws Exception {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
 
 	
 }
