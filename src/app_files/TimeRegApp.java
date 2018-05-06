@@ -14,6 +14,7 @@ public class TimeRegApp {
 	public List<WorkPlanned> workplannedlist = new ArrayList<>();
 	public List<Activity> activitylist = new ArrayList<>();
 
+	//StefanAndersen
 	public List getActivityList() {
 		return activitylist;
 	}
@@ -154,7 +155,8 @@ public class TimeRegApp {
 		return null;
 
 	}
-
+	
+	//StefanAndersen
 	public Activity getActivity(String projectId, String activityId) {
 
 		if (standAloneTest) {
@@ -179,6 +181,7 @@ public class TimeRegApp {
 		}
 	}
 
+	//StefanAndersen
 	public Resource getResource(String resourceId) {
 
 		if (standAloneTest) {
