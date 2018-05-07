@@ -29,6 +29,7 @@ public class StartScreen extends Screen {
 		out.println("AddResource <Name> <Initials> <Password>                                           (-> OK)");
 		out.println(
 				"ListResources                                                                      (-> Nx n*Name, n*initials, n*passwords");
+		out.println("ListOfAvailableResources <startWeek> <endWeek>									(-> Nx startWeek endWeek");
 		out.println("AddWorkPlanned <ProjectId> <ActivityName> <ResourceInitials> <StartWeek> <EndWeek> (-> OK)");
 		out.println(
 				"ListWorkPlanned                                                                    (-> Nx ProjectId, ActivityName, ResourceInitials, FromWeek, ToWeek");
@@ -109,8 +110,13 @@ public class StartScreen extends Screen {
 			String resourcePassword = Tokens[3];
 
 			Resource newResource = new Resource(resourceName, resourceInitials, resourcePassword);
-
-			timeRegUI.getTimeRegApp().registerResource(newResource);
+	
+				try {
+					timeRegUI.getTimeRegApp().registerResource(newResource);
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+		
 
 			System.out.println("Ok");
 		}
@@ -124,6 +130,15 @@ public class StartScreen extends Screen {
 
 				System.out.println(currentResource.getFullName() + " " + currentResource.getId() + " "
 						+ currentResource.getPassword());
+			}
+		//Jacob Kjaerby Christensen
+		if("ListOfAvailableResources".equals(command)) {
+			handled = true;
+				int startWeek =  Integer.parseInt(Tokens[1]);
+				int endWeek = Integer.parseInt(Tokens[2]);
+				
+				
+					timeRegUI.getTimeRegApp().resourcesAvailableInTimeFrame(startWeek,endWeek);
 			}
 		}
 
