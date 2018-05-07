@@ -17,7 +17,7 @@ public class StartScreen extends Screen {
 		out.println("TimeReg application menu");
 		out.println("Commands, <> specifies input parameters, do not use space within a single parameter:");
 		out.println("Login <Initials> <Password>													(-> OK)");
-		out.println("CreateUser <FullNameLastName> <Initials> <Password>									(-> OK)");
+		out.println("CreateUser <FullNameLastName> <Initials> <Password>							(-> OK)");
 		out.println(
 				"AddProject <ProjectName>]                                                          (-> OK, ProjectID)");
 		out.println(
@@ -62,6 +62,7 @@ public class StartScreen extends Screen {
 		System.out.println("command =" + command);
 		handled = false;
 		
+		//Author: Rizwan Ali Ishaq
 		if ("Login".equals(command)) {
 			handled = true;
 			timeRegUI.getTimeRegApp().userLogin(Tokens[1], Tokens[2]);
@@ -72,6 +73,7 @@ public class StartScreen extends Screen {
 			}
 		}
 		
+		//Author: Rizwan Ali Ishaq
 		if ("CreateUser".equals(command)) {
 			handled = true;
 			Resource newUser = new Resource(Tokens[1],Tokens[2],Tokens[3]);
@@ -83,6 +85,7 @@ public class StartScreen extends Screen {
 			}
 		}
 		
+		//Author: Rizwan Ali Ishaq
 		if (timeRegUI.getTimeRegApp().userLoggedIn == true) {
 			
 			// StefanAndersen

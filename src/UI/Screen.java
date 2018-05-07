@@ -1,3 +1,4 @@
+//Author: Rizwan Ali Ishaq & Jacob Kjaerby Christensen
 package UI;
 
 import java.io.BufferedReader;

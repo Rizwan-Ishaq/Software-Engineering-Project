@@ -1,6 +1,4 @@
-//Stefan Siggaard Andersen || Kayaba Akihiko || Day Date Month year
-//DTU Student ID S144230
-//Instructor: Professor Paul Fischer
+//Stefan Siggaard Andersen  & Mohaiman Rahim
 package app_files;
 
 public class Activity {
@@ -12,7 +10,6 @@ public class Activity {
 	private int endWeek;
 
 	public Activity(String projId, String actId, int budgetHours, int startWeek, int endWeek) {
-
 		this.projId = projId;
 		this.actId = actId;
 		this.budgetHours = budgetHours;
@@ -28,17 +25,5 @@ public class Activity {
 	public String getProjId() {
 		return this.projId;
 	}
-	
-/*	public int getBudgetHours() {
-		return this.budgetHours;
-	}
-	
-	public int getStartWeek() {
-		return this.startWeek;
-	}
-	
-	public int getEndWeek() {
-		return this.endWeek;
-	} */
 
 }

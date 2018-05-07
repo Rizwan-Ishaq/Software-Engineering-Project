@@ -1,7 +1,6 @@
 package app_files;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class TimeRegApp {
 	public int indexResource;
 	
 	//StefanAndersen
-	public List getActivityList() {
+	public List<Activity> getActivityList() {
 		return activitylist;
 	}
 
@@ -80,7 +79,6 @@ public class TimeRegApp {
 			userLoggedIn = false;
 			return userLoggedIn;
 		}
-		
 	}
 	
 	//Author: Rizwan Ali Ishaq
