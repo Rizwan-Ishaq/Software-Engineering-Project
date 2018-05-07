@@ -234,21 +234,26 @@ public class TimeRegApp {
 	
 	//Author: Rizwan Ali Ishaq
 	public boolean userLogin(String inputInitials, String inputPassword) {
-		for (Resource resource : resourcelist) {
-			if(inputInitials.equals(resource.getId())) {
-				indexUsername =  getResources().indexOf(resource);
+		System.out.println("Userlogin 1 " + userLoggedIn());
+		for (Resource resource : resourcelist) { 							//path 1
+			if(inputInitials.equals(resource.getId())) {					//path 2
+				indexUsername = getResources().indexOf(resource);
+				System.out.println("Userlogin 2 " + userLoggedIn());
 			} else {
-				userLoggedIn = false;
 				return userLoggedIn();
 			}
+		//return userLoggedIn();
 		}
 		
-		if (inputPassword.equals(resourcelist.get(indexUsername).getPassword())) {
+		if (inputPassword.equals(resourcelist.get(indexUsername).getPassword())) { //path 3
+			System.out.println("Userlogin 3 " + userLoggedIn());
 			userLoggedIn = true;
+			System.out.println("Userlogin 4 " + userLoggedIn());
+			return userLoggedIn();
 		} else {
 			userLoggedIn = false;
+			return userLoggedIn;
 		}
 		
-		return userLoggedIn();
 	}
 }
