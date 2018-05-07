@@ -29,7 +29,7 @@ public class StartScreen extends Screen {
 		out.println("AddResource <Name> <Initials> <Password>                                           (-> OK)");
 		out.println(
 				"ListResources                                                                      (-> Nx n*Name, n*initials, n*passwords");
-		out.println("ListOfAvailableResources");
+		out.println("ListOfAvailableResources <startWeek> <endWeek>									(-> Nx startWeek endWeek");
 		out.println("AddWorkPlanned <ProjectId> <ActivityName> <ResourceInitials> <StartWeek> <EndWeek> (-> OK)");
 		out.println(
 				"ListWorkPlanned                                                                    (-> Nx ProjectId, ActivityName, ResourceInitials, FromWeek, ToWeek");
