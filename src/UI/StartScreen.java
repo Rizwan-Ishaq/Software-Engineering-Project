@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import app_files.Activity;
 import app_files.Project;
 import app_files.Resource;
+import app_files.TimeRegistration;
 import app_files.WorkPlanned;
 
 public class StartScreen extends Screen {
@@ -37,13 +38,8 @@ public class StartScreen extends Screen {
 		out.println(
 				"ListWorkPlannedForResource <ResourceInitials>                                      	(-> Nx ProjectId, ActivityName, ResourceInitials, FromWeek, ToWeek");
 		out.println("RegisterTime <Initials> <Week> <Day> <HoursWorked>					(-> OK)");
-		out.println("RegisterSpecialActivity <Initials> <StartWeek> <EndWeek> <StartDay> <EndDay>		(-> OK)");
 		out.println("GetTimeRegistration <Initials>								(-> OK)");
-		out.println("GetSpecialActivityRegistration <Initials>						(-> OK)");
-		out.println("ChangeTimeRegistration <Initials> <Week> <Day> <HoursWorked>				(-> OK)");
-		out.println("ChangeSpecialActivity <Initials> <StartWeek> <EndWeek> <StartDay> <EndDay>		(-> OK)");
 		out.println("DeleteTimeRegistration <Initials> <Week> <Day> <HoursWorked>				(-> OK)");
-		out.println("DeleteSpecialActivity <Initials> <StartWeek> <EndWeek> <StartDay> <EndDay>		(-> OK)");
 		System.out.println("Implemented for testing. Not all commands implemented");
 		out.println("Exit");
 		out.println("Enter Command xx:");
@@ -58,7 +54,7 @@ public class StartScreen extends Screen {
 
 		String[] Tokens = selection.split(" "); // Her opdeler vi input der hvor der er mellemrum
 		String command = Tokens[0];
-		System.out.println("command =" + command);
+		System.out.println("command = " + command);
 		handled = false;
 		
 		//Author: Rizwan Ali Ishaq
@@ -201,9 +197,53 @@ public class StartScreen extends Screen {
 				}
 			}
 			
-			//
-			if ("GetTimeRegistration".equals(command)) {
+			//Author: Mohaiman Rahim, S174120
+			if ("RegisterTime".equals(command)) {
 				handled = true;
+				
+				String initials = Tokens[1];
+				int week = Integer.parseInt(Tokens[2]);
+				int day = Integer.parseInt(Tokens[3]);
+				int hoursWorked = Integer.parseInt(Tokens[4]);
+				
+				int index = timeRegUI.getTimeRegApp().getResources().indexOf(initials);
+				Resource resource = timeRegUI.getTimeRegApp().getResources().get(index);
+
+				TimeRegistration timeRegistration = new TimeRegistration(resource, week, day, hoursWorked);
+				try {
+					timeRegUI.getTimeRegApp().registerTime(timeRegistration);
+				} catch (Exception e) { }
+			}
+			
+			//Author: Mohaiman Rahim, S174120
+			if ("GetTimeRegistration".equals(command)) {
+				handled = true;	
+				
+				String initials = Tokens[1];
+				
+				try {
+					timeRegUI.getTimeRegApp().getTimeRegistration(initials);
+				} catch (Exception e) {
+					System.out.println("No time registrations made");
+				}
+			}
+			
+			//Author: Mohaiman Rahim, S174120
+			if ("DeleteTimeRegistration".equals(command)) {
+				handled = true;
+				
+				String initials = Tokens[1];
+				int week = Integer.parseInt(Tokens[2]);
+				int day = Integer.parseInt(Tokens[3]);
+				int hoursWorked = Integer.parseInt(Tokens[4]);
+				
+				int index = timeRegUI.getTimeRegApp().getResources().indexOf(initials);
+				Resource resource = timeRegUI.getTimeRegApp().getResources().get(index);
+
+				TimeRegistration timeRegistration = new TimeRegistration(resource, week, day, hoursWorked);
+				try {
+					timeRegUI.getTimeRegApp().deleteTimeRegistration(timeRegistration);
+				} catch (Exception e) { }
 			}
 		}	
 		
