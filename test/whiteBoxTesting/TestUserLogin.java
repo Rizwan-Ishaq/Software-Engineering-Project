@@ -34,17 +34,12 @@ public class TestUserLogin {
 	
 	@Test
 	public void testEmptyResourceList() {
-		
-		expectedException.expect(IndexOutOfBoundsException.class);
-		
-		getTimeRegApp().userLogin("RAI", "lyngby123");
-		
+		assertTrue(getTimeRegApp().userLogin("RAI", "lyngby123"));		
 		assertFalse(getTimeRegApp().userLoggedIn());
 	}
 	
 	@Test
 	public void testWrongInitials() {
-		
 		createTestResource();
 		
 		getTimeRegApp().userLogin("IAR", "lyngby123");

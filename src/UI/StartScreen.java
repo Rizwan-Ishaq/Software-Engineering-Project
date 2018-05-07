@@ -15,35 +15,27 @@ public class StartScreen extends Screen {
 	public void printScreen(PrintWriter out) throws IOException {
 		out.println("TimeReg application menu");
 		out.println("Commands, <> specifies input parameters, do not use space within a single parameter:");
-		out.println("Login <Initials> <Password>								(-> OK)");
-		out.println("CreateUser <FullNameLastName> <Initials> <Password>					(-> OK)");
+		out.println("Login <Initials> <Password>													(-> OK)");
+		out.println("CreateUser <FullNameLastName> <Initials> <Password>									(-> OK)");
 		out.println(
-				"AddProject <ProjectName>                                                          	(-> OK, ProjectID)");
+				"AddProject <ProjectName>                                                           (-> OK, ProjectID)");
 		out.println(
-				"ListProjects                                                               	 	(-> Nx ProjectName, ProjectID)");
-		out.println("AddActivity <ProjectId> <ActivityName> <BudgetHours> <startWeek> <endWeek>     		(-> OK)");
+				"ListProjects                                                                       (-> Nx ProjectName, ProjectID)");
+		out.println("AddActivity <ProjectId> <ActivityName> <BudgetHours> <startWeek> <endWeek>     (-> OK)");
 		out.println(
-				"ListActivities                                                                    	(-> Nx ProjectId, ActivityName)");
+				"ListActivities                                                                     (-> Nx ProjectId, ActivityName)");
 		out.println(
-				"ListActivitiesForProject <ProjectId>                                              	(-> Nx ActivityName)");
-		out.println("AddResource <Name> <Initials> <Password>                                           	(-> OK)");
+				"ListActivitiesForProject <ProjectId>                                               (-> Nx ActivityName)");
+		out.println("AddResource <Name> <Initials> <Password>                                           (-> OK)");
 		out.println(
-				"ListResources                                                                     	(-> Nx n*Name, n*initials, n*passwords");
-		out.println("AddWorkPlanned <ProjectId> <ActivityName> <ResourceInitials> <StartWeek> <EndWeek> 	(-> OK)");
+				"ListResources                                                                      (-> Nx n*Name, n*initials, n*passwords");
+		out.println("AddWorkPlanned <ProjectId> <ActivityName> <ResourceInitials> <StartWeek> <EndWeek> (-> OK)");
 		out.println(
-				"ListWorkPlanned                                                                  	(-> Nx ProjectId, ActivityName, ResourceInitials, FromWeek, ToWeek");
+				"ListWorkPlanned                                                                    (-> Nx ProjectId, ActivityName, ResourceInitials, FromWeek, ToWeek");
 		out.println(
-				"ListWorkPlannedForProject <ProjectId>                                              	(-> Nx ProjectId, ActivityName, ResourceInitials, FromWeek, ToWeek");
+				"ListWorkPlannedForProject <ProjectId>                                              (-> Nx ProjectId, ActivityName, ResourceInitials, FromWeek, ToWeek");
 		out.println(
-				"ListWorkPlannedForResource <ResourceInitials>                                      	(-> Nx ProjectId, ActivityName, ResourceInitials, FromWeek, ToWeek");
-		out.println("RegisterTime <Initials> <Week> <Day> <HoursWorked>					(-> OK)");
-		out.println("RegisterSpecialActivity <Initials> <StartWeek> <EndWeek> <StartDay> <EndDay>		(-> OK)");
-		out.println("GetTimeRegistration <Initials>								(-> OK)");
-		out.println("GetSpecialActivityRegistration <Initials>						(-> OK)");
-		out.println("ChangeTimeRegistration <Initials> <Week> <Day> <HoursWorked>				(-> OK)");
-		out.println("ChangeSpecialActivity <Initials> <StartWeek> <EndWeek> <StartDay> <EndDay>		(-> OK)");
-		out.println("DeleteTimeRegistration <Initials> <Week> <Day> <HoursWorked>				(-> OK)");
-		out.println("DeleteSpecialActivity <Initials> <StartWeek> <EndWeek> <StartDay> <EndDay>		(-> OK)");
+				"ListWorkPlannedForResource <ResourceInitials>                                      (-> Nx ProjectId, ActivityName, ResourceInitials, FromWeek, ToWeek");
 		System.out.println("Implemented for testing. Not all commands implemented");
 		out.println("Exit");
 		out.println("Enter Command xx:");
@@ -61,7 +53,6 @@ public class StartScreen extends Screen {
 		System.out.println("command =" + command);
 		handled = false;
 		
-		//Author: Rizwan Ali Ishaq
 		if ("Login".equals(command)) {
 			handled = true;
 			timeRegUI.getTimeRegApp().userLogin(Tokens[1], Tokens[2]);
@@ -72,7 +63,6 @@ public class StartScreen extends Screen {
 			}
 		}
 		
-		//Author: Rizwan Ali Ishaq
 		if ("CreateUser".equals(command)) {
 			handled = true;
 			Resource newUser = new Resource(Tokens[1],Tokens[2],Tokens[3]);
@@ -85,8 +75,7 @@ public class StartScreen extends Screen {
 		}
 		
 		if (timeRegUI.getTimeRegApp().userLoggedIn == true) {
-			
-			// StefanAndersen
+
 			if ("AddProject".equals(command)) {
 				handled = true;
 				String projectName = Tokens[1];
@@ -98,8 +87,7 @@ public class StartScreen extends Screen {
 				System.out.println(newProject.getId());
 				System.out.println("Ok");
 			}
-			
-			// StefanAndersen
+	
 			if ("ListProjects".equals(command)) {
 				handled = true;
 	
@@ -110,8 +98,7 @@ public class StartScreen extends Screen {
 					System.out.println(currentProject.getId() + " " + currentProject.getName());
 				}
 			}
-			
-			// StefanAndersen
+	
 			if ("AddActivity".equals(command)) {
 				handled = true;
 				String projectId = Tokens[1];
@@ -126,8 +113,7 @@ public class StartScreen extends Screen {
 	
 				System.out.println("Ok");
 			}
-			
-			// StefanAndersen
+	
 			if ("ListActivities".equals(command)) {
 				handled = true;
 	
@@ -138,8 +124,7 @@ public class StartScreen extends Screen {
 					System.out.println(currentActivity.getProjId() + " " + currentActivity.getActId());
 				}
 			}
-			
-			// StefanAndersen
+	
 			if ("AddResource".equals(command)) {
 				handled = true;
 				String resourceName = Tokens[1];
@@ -156,8 +141,7 @@ public class StartScreen extends Screen {
 	
 				System.out.println("Ok");
 			}
-			
-			// StefanAndersen
+	
 			if ("ListResources".equals(command)) {
 				handled = true;
 	
@@ -169,8 +153,7 @@ public class StartScreen extends Screen {
 							+ currentResource.getPassword());
 				}
 			}
-			
-			// StefanAndersen
+	
 			if ("AddWorkPlanned".equals(command)) {
 				handled = true;
 				String projectId = Tokens[1];
@@ -185,8 +168,7 @@ public class StartScreen extends Screen {
 	
 				System.out.println("OK");
 			}
-			
-			// StefanAndersen
+	
 			if ("ListWorkPlanned".equals(command)) {
 				handled = true;
 	
@@ -200,21 +182,14 @@ public class StartScreen extends Screen {
 	
 				}
 			}
-			
-			//
-			if ("GetTimeRegistration".equals(command)) {
-				handled = true;
-			}
 		}	
-		
-		// StefanAndersen
+
 		if ("Exit".equals(command)) {
 			handled = true;
 			System.out.println("Goodbye");
 			return true;
 		}
-		
-		// StefanAndersen
+
 		if (!handled) {
 
 			System.out.println("Unknown Command");
