@@ -1,6 +1,7 @@
 package app_files;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -8,14 +9,20 @@ import app_files.Project;
 
 public class TimeRegApp {
 
-	private boolean userLoggedIn = false;
+	public boolean userLoggedIn = false;
+	public int indexUsername;
+	public int indexResource;
 	public List<Resource> resourcelist = new ArrayList<>();
 	public List<Project> projectlist = new ArrayList<>();
 	public List<WorkPlanned> workplannedlist = new ArrayList<>();
 	public List<Activity> activitylist = new ArrayList<>();
+	public List<TimeRegistration> timeregistrationlist = new ArrayList<>();
+	public List<SpecialActivityRegistration> specialactivityregistrationlist = new ArrayList<>();
+	public List<TimeRegistration> usertimeregistrationlist = new ArrayList<>();
+	public List<SpecialActivityRegistration> userspecialactivityregistrationlist = new ArrayList<>();
 
 	//StefanAndersen
-	public List getActivityList() {
+	public List<Activity> getActivityList() {
 		return activitylist;
 	}
 
@@ -25,14 +32,161 @@ public class TimeRegApp {
 	public boolean userLoggedIn() {
 		return userLoggedIn;
 	}
-
+	
+	//Author: Rizwan Ali Ishaq
 	public void registerResource(Resource resource) throws Exception {
 		if (resourcelist.contains(resource)) {
 			throw new Exception("User is already registered");
 		}
 		resourcelist.add(resource);
 	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public List<TimeRegistration> getTimeRegistrationList() {
+		return timeregistrationlist;
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public List<SpecialActivityRegistration> getSpecialActivityRegistrationList() {
+		return specialactivityregistrationlist;
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public void registerTime(TimeRegistration timeRegistration) throws Exception {
+		if (resourcelist.contains(timeRegistration.getResource())) {
+			for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
+				if(timeRegistration.getResource().getId().equals(timeRegistrationInList.getResource().getId()) && 
+						timeRegistration.getWeek().equals(timeRegistrationInList.getWeek()) && 
+						timeRegistration.getDay().equals(timeRegistrationInList.getDay())) {
+					throw new Exception("No time registration found for this user on that time");
+				} else {
+					timeregistrationlist.add(timeRegistration);
+				}
+			}
+		} else {
+			throw new Exception("User doesn't exist");
+		}
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public void registerSpecialActivity(SpecialActivityRegistration specialActivityRegistration) throws Exception {
+		if (resourcelist.contains(specialActivityRegistration.getResource())) {
+			for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
+				if(specialActivityRegistration.getResource().getId().equals(specialActivityRegistrationInList.getResource().getId()) &&
+						specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
+						specialActivityRegistration.getStartWeek().equals(specialActivityRegistrationInList.getStartWeek()) && 
+						specialActivityRegistration.getStartDay().equals(specialActivityRegistrationInList.getStartDay()) && 
+						specialActivityRegistration.getEndWeek().equals(specialActivityRegistrationInList.getEndWeek()) && 
+						specialActivityRegistration.getEndDay().equals(specialActivityRegistrationInList.getEndDay())) {
+					throw new Exception("Special activity already exist for this user on these days");
+				} else {
+					specialactivityregistrationlist.add(specialActivityRegistration);
+				}
+			}
+		} else {
+			throw new Exception("User doesn't exist");
+		}
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public void getTimeRegistration(String initials) throws Exception {
+		for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
+			if(initials.equals(timeRegistrationInList.getResource().getId())) {
+				usertimeregistrationlist.add(timeRegistrationInList);
+			} else {
+				throw new Exception("No time registrations found for this user");
+			}
+		}
+		
+		Arrays.toString(usertimeregistrationlist.toArray());
+		usertimeregistrationlist.clear();
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public void changeTimeRegistration(TimeRegistration timeRegistration) throws Exception {
+		for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
+			if(timeRegistration.getResource().getId().equals(timeRegistrationInList.getResource().getId()) && 
+					timeRegistration.getWeek().equals(timeRegistrationInList.getWeek()) && 
+					timeRegistration.getDay().equals(timeRegistrationInList.getDay())) {
+				indexResource =  getTimeRegistrationList().indexOf(timeRegistrationInList);
+			} else {
+				throw new Exception("No time registration found for this user on that time");
+			}
+		}
 
+		timeregistrationlist.get(indexResource).setWeek(timeRegistration.getWeek());
+		timeregistrationlist.get(indexResource).setDay(timeRegistration.getDay());
+		timeregistrationlist.get(indexResource).setHoursWorked(timeRegistration.getHoursWorked());
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public void deleteTimeRegistration(TimeRegistration timeRegistration) throws Exception {
+		for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
+			if(timeRegistration.getResource().getId().equals(timeRegistrationInList.getResource().getId()) && 
+					timeRegistration.getWeek().equals(timeRegistrationInList.getWeek()) && 
+					timeRegistration.getDay().equals(timeRegistrationInList.getDay())) {
+				indexResource =  getTimeRegistrationList().indexOf(timeRegistrationInList);
+			} else {
+				throw new Exception("No time registration found for this user on that time");
+			}
+		}
+
+		timeregistrationlist.remove(indexResource);
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public void getSpecialActivityRegistration(String initials) throws Exception {
+		for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
+			if(initials.equals(specialActivityRegistrationInList.getResource().getId())) {
+				userspecialactivityregistrationlist.add(specialActivityRegistrationInList);
+			} else {
+				throw new Exception("No special activity registrations found for this user");
+			}
+		}
+		
+		Arrays.toString(userspecialactivityregistrationlist.toArray());
+		userspecialactivityregistrationlist.clear();
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public void changeSpecialActivityRegistration(SpecialActivityRegistration specialActivityRegistration) throws Exception {
+		for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
+			if(specialActivityRegistration.getResource().getId().equals(specialActivityRegistrationInList.getResource().getId()) &&
+					specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
+					specialActivityRegistration.getStartWeek().equals(specialActivityRegistrationInList.getStartWeek()) && 
+					specialActivityRegistration.getStartDay().equals(specialActivityRegistrationInList.getStartDay()) && 
+					specialActivityRegistration.getEndWeek().equals(specialActivityRegistrationInList.getEndWeek()) && 
+					specialActivityRegistration.getEndDay().equals(specialActivityRegistrationInList.getEndDay())) {
+				indexResource =  getSpecialActivityRegistrationList().indexOf(specialActivityRegistrationInList);
+			} else {
+				throw new Exception("No special activity registration found for this user on that time");
+			}
+		}
+		specialactivityregistrationlist.get(indexResource).setActivity(specialActivityRegistration.getActivity());
+		specialactivityregistrationlist.get(indexResource).setStartWeek(specialActivityRegistration.getStartWeek());
+		specialactivityregistrationlist.get(indexResource).setStartDay(specialActivityRegistration.getStartDay());
+		specialactivityregistrationlist.get(indexResource).setEndWeek(specialActivityRegistration.getEndWeek());
+		specialactivityregistrationlist.get(indexResource).setEndDay(specialActivityRegistration.getEndDay());		
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public void deleteSpecialActivityRegistration(SpecialActivityRegistration specialActivityRegistration) throws Exception {
+		for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
+			if(specialActivityRegistration.getResource().getId().equals(specialActivityRegistrationInList.getResource().getId()) && 
+					specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
+					specialActivityRegistration.getStartWeek().equals(specialActivityRegistrationInList.getStartWeek()) && 
+					specialActivityRegistration.getStartDay().equals(specialActivityRegistrationInList.getStartDay()) && 
+					specialActivityRegistration.getEndWeek().equals(specialActivityRegistrationInList.getEndWeek()) && 
+					specialActivityRegistration.getEndDay().equals(specialActivityRegistrationInList.getEndDay())) {
+				indexResource =  getSpecialActivityRegistrationList().indexOf(specialActivityRegistrationInList);
+			} else {
+				throw new Exception("No special activity registration found for this user on that time");
+			}
+		}
+
+		specialactivityregistrationlist.remove(indexResource);
+	}
+	
 	// StefanAndersen Test
 	/*
 	 * public void whatever() {
@@ -153,10 +307,8 @@ public class TimeRegApp {
 
 		}
 		return null;
-
 	}
 	
-	//StefanAndersen
 	public Activity getActivity(String projectId, String activityId) {
 
 		if (standAloneTest) {
@@ -180,6 +332,11 @@ public class TimeRegApp {
 			return null;
 		}
 	}
+
+//	public void addWorkPlanned(WorkPlanned WorkPlanned) {
+//		workplannedlist.add(WorkPlanned);
+//	}
+
 
 	//StefanAndersen
 	public Resource getResource(String resourceId) {
@@ -215,4 +372,29 @@ public class TimeRegApp {
 		}
 	}
 
+	public List<Resource> getResources() {
+		return resourcelist;
+	}
+	
+	//Author: Rizwan Ali Ishaq
+	public int getIndexUsername() {
+		return indexUsername;
+	}
+	
+	//Author: Rizwan Ali Ishaq
+	public boolean userLogin(String inputInitials, String inputPassword) {
+		for (Resource resource : resourcelist) {
+			if(inputInitials.equals(resource.getId())) {
+				indexUsername =  getResources().indexOf(resource);
+			} else {
+				userLoggedIn = false;
+			}
+		}
+		
+		if (inputPassword.equals(resourcelist.get(indexUsername).getPassword())) {
+			userLoggedIn = true;
+		}
+		
+		return userLoggedIn();
+	}
 }
