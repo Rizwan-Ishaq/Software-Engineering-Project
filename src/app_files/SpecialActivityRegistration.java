@@ -6,12 +6,12 @@ public class SpecialActivityRegistration {
 	TimeRegApp timeRegApp = new TimeRegApp();
 	private String resource;
 	private String activity;
-	private String startWeek;
-	private String startDay;
-	private String endDay;
-	private String endWeek;
+	private int startWeek;
+	private int startDay;
+	private int endDay;
+	private int endWeek;
 	
-	public SpecialActivityRegistration(String initials, String activity, String startWeek, String endWeek, String startDay, String endDay) {
+	public SpecialActivityRegistration(String initials, String activity, int startWeek, int endWeek, int startDay, int endDay) {
 		this.resource = initials;
 		this.setActivity(activity);
 		this.startWeek = startWeek;
@@ -36,35 +36,35 @@ public class SpecialActivityRegistration {
 		this.activity = activity;
 	}
 
-	public String getStartWeek() {
+	public int getStartWeek() {
 		return startWeek;
 	}
 
-	public void setStartWeek(String startWeek) {
+	public void setStartWeek(int startWeek) {
 		this.startWeek = startWeek;
 	}
 
-	public String getStartDay() {
+	public int getStartDay() {
 		return startDay;
 	}
 
-	public void setStartDay(String startDay) {
+	public void setStartDay(int startDay) {
 		this.startDay = startDay;
 	}
 
-	public String getEndDay() {
+	public int getEndDay() {
 		return endDay;
 	}
 
-	public void setEndDay(String endDay) {
+	public void setEndDay(int endDay) {
 		this.endDay = endDay;
 	}
 
-	public String getEndWeek() {
+	public int getEndWeek() {
 		return endWeek;
 	}
 
-	public void setEndWeek(String endWeek) {
+	public void setEndWeek(int endWeek) {
 		this.endWeek = endWeek;
 	}
 }

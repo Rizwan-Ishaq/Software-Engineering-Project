@@ -28,6 +28,7 @@ public class TimeRegApp {
 
 	// testpurposes
 	Boolean standAloneTest = false;
+	private String message;
 
 	public boolean userLoggedIn() {
 		return userLoggedIn;
@@ -52,86 +53,144 @@ public class TimeRegApp {
 	}
 	
 	//Author: Mohaiman Rahim, S174120
-	public void registerTime(TimeRegistration timeRegistration) throws Exception {
-		if (resourcelist.contains(timeRegistration.getResource())) {
-			for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
-				if(timeRegistration.getResource().equals(timeRegistrationInList.getResource()) && 
-						timeRegistration.getWeek().equals(timeRegistrationInList.getWeek()) && 
-						timeRegistration.getDay().equals(timeRegistrationInList.getDay())) {
-					throw new Exception("No time registration found for this user on that time");
-				} else {
+	public String registerTime(TimeRegistration timeRegistration) throws Exception {
+		if (timeRegistration.getDay() > 7 || timeRegistration.getDay() < 1) {
+			message = "Day out of bounds";
+		} else if (timeRegistration.getWeek() > 52 || timeRegistration.getWeek() < 1) {
+			message = "Week out of bounds";
+		} else if (timeRegistration.getHoursWorked() > 24 || timeRegistration.getHoursWorked() < 1) {
+			message = "Hours out of bounds";
+		} else {	
+			if (resourcelist.contains(timeRegistration.getResource())) {
+				if (timeregistrationlist.size() == 0) {
 					timeregistrationlist.add(timeRegistration);
+					message = "Time is registered";
+				} else {
+					for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
+						if(timeRegistration.getResource().equals(timeRegistrationInList.getResource()) && 
+								timeRegistration.getWeek()==timeRegistrationInList.getWeek() && 
+								timeRegistration.getDay()==timeRegistrationInList.getDay()) {
+							message = "Time registration already done for this user on that time";
+						} else {
+							timeregistrationlist.add(timeRegistration);
+							message = "Time is registered";
+						}
+					}
 				}
+			} else {
+				message = "User doesn't exist";
 			}
-		} else {
-			throw new Exception("User doesn't exist");
 		}
+		return message;
 	}
 	
 	//Author: Mohaiman Rahim, S174120
 	public void registerSpecialActivity(SpecialActivityRegistration specialActivityRegistration) throws Exception {
-		if (resourcelist.contains(specialActivityRegistration.getResource())) {
-			for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
-				if(specialActivityRegistration.getResource().equals(specialActivityRegistrationInList.getResource()) &&
-						specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
-						specialActivityRegistration.getStartWeek().equals(specialActivityRegistrationInList.getStartWeek()) && 
-						specialActivityRegistration.getStartDay().equals(specialActivityRegistrationInList.getStartDay()) && 
-						specialActivityRegistration.getEndWeek().equals(specialActivityRegistrationInList.getEndWeek()) && 
-						specialActivityRegistration.getEndDay().equals(specialActivityRegistrationInList.getEndDay())) {
-					throw new Exception("Special activity already exist for this user on these days");
-				} else {
-					specialactivityregistrationlist.add(specialActivityRegistration);
+		if (specialActivityRegistration.getStartDay() > 7 || specialActivityRegistration.getStartDay() < 1
+				|| specialActivityRegistration.getEndDay() > 7 || specialActivityRegistration.getEndDay() < 1) {
+			throw new Exception("Day out of bounds");
+		} else if (specialActivityRegistration.getStartWeek() > 52 || specialActivityRegistration.getStartWeek() < 1
+				|| specialActivityRegistration.getEndWeek() > 52 || specialActivityRegistration.getEndWeek() < 1) {
+			throw new Exception("Week out of bounds");
+		} else if (specialActivityRegistration.getStartWeek()==specialActivityRegistration.getEndWeek() && 
+				specialActivityRegistration.getStartDay() > specialActivityRegistration.getEndDay()) {
+			throw new Exception("Start day is after end day");
+		} else if (specialActivityRegistration.getStartWeek() > specialActivityRegistration.getEndWeek()) {
+			throw new Exception("Start week is after end week");
+		} else {
+			if (resourcelist.contains(specialActivityRegistration.getResource())) {
+				for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
+					if(specialActivityRegistration.getResource().equals(specialActivityRegistrationInList.getResource()) &&
+							specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
+							specialActivityRegistration.getStartWeek()==specialActivityRegistrationInList.getStartWeek() && 
+							specialActivityRegistration.getStartDay()==specialActivityRegistrationInList.getStartDay() && 
+							specialActivityRegistration.getEndWeek()==specialActivityRegistrationInList.getEndWeek() && 
+							specialActivityRegistration.getEndDay()==specialActivityRegistrationInList.getEndDay()) {
+						throw new Exception("Special activity already exist for this user on these days");
+					} else {
+						specialactivityregistrationlist.add(specialActivityRegistration);
+					}
+				}
+			} else {
+				throw new Exception("User doesn't exist");
+			}
+		}
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public String getTimeRegistration(String initials) throws Exception {
+		if (timeregistrationlist.size() > 0) {
+			for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
+				if(initials.equals(timeRegistrationInList.getResource().getId())) {
+					usertimeregistrationlist.add(timeRegistrationInList);
 				}
 			}
-		} else {
-			throw new Exception("User doesn't exist");
-		}
-	}
-	
-	//Author: Mohaiman Rahim, S174120
-	public void getTimeRegistration(String initials) throws Exception {
-		for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
-			if(initials.equals(timeRegistrationInList.getResource())) {
-				usertimeregistrationlist.add(timeRegistrationInList);
+			
+			if (usertimeregistrationlist.size() > 0) {
+				message = "Time registration list for user is created";
+				Arrays.toString(usertimeregistrationlist.toArray());
 			} else {
-				throw new Exception("No time registrations found for this user");
+				message = "No time registrations found for this user";
 			}
+		} else {
+			message = "No time registrations made";
 		}
 		
-		Arrays.toString(usertimeregistrationlist.toArray());
 		usertimeregistrationlist.clear();
+		
+		return message;
 	}
 	
 	//Author: Mohaiman Rahim, S174120
-	public void changeTimeRegistration(TimeRegistration timeRegistration) throws Exception {
-		for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
-			if(timeRegistration.getResource().equals(timeRegistrationInList.getResource()) && 
-					timeRegistration.getWeek().equals(timeRegistrationInList.getWeek()) && 
-					timeRegistration.getDay().equals(timeRegistrationInList.getDay())) {
-				indexResource =  getTimeRegistrationList().indexOf(timeRegistrationInList);
-			} else {
-				throw new Exception("No time registration found for this user on that time");
-			}
-		}
-
-		timeregistrationlist.get(indexResource).setWeek(timeRegistration.getWeek());
-		timeregistrationlist.get(indexResource).setDay(timeRegistration.getDay());
-		timeregistrationlist.get(indexResource).setHoursWorked(timeRegistration.getHoursWorked());
-	}
+//	public String changeTimeRegistration(TimeRegistration timeRegistration) throws Exception {
+//		if (timeregistrationlist.size() > 0) {
+//			for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
+//				if(timeRegistration.getResource().equals(timeRegistrationInList.getResource()) && 
+//						timeRegistration.getWeek()==timeRegistrationInList.getWeek() && 
+//						timeRegistration.getDay()==timeRegistrationInList.getDay()) {
+//					indexResource =  getTimeRegistrationList().indexOf(timeRegistrationInList);
+//				} else {
+//					message = "No time registration found for this user on that time";
+//				}
+//			}
+//			
+//			if (timeRegistration.getDay() > 7 || timeRegistration.getDay() < 1) {
+//				message = "Day out of bounds";
+//			} else if (timeRegistration.getWeek() > 52 || timeRegistration.getWeek() < 1) {
+//				message = "Week out of bounds";
+//			} else if (timeRegistration.getHoursWorked() > 24 || timeRegistration.getHoursWorked() < 1) {
+//				message = "Hours out of bounds";
+//			} else {
+//				timeregistrationlist.get(indexResource).setHoursWorked(timeRegistration.getHoursWorked());
+//				message = "Time registration is changed";
+//			}
+//		} else {
+//			message = "No time registrations made";
+//		}
+//		
+//		return message;
+//	}
 	
 	//Author: Mohaiman Rahim, S174120
-	public void deleteTimeRegistration(TimeRegistration timeRegistration) throws Exception {
-		for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
-			if(timeRegistration.getResource().equals(timeRegistrationInList.getResource()) && 
-					timeRegistration.getWeek().equals(timeRegistrationInList.getWeek()) && 
-					timeRegistration.getDay().equals(timeRegistrationInList.getDay())) {
-				indexResource =  getTimeRegistrationList().indexOf(timeRegistrationInList);
-			} else {
-				throw new Exception("No time registration found for this user on that time");
+	public String deleteTimeRegistration(TimeRegistration timeRegistration) throws Exception {
+		if (timeregistrationlist.size() > 0) {
+			for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
+				if(timeRegistration.getResource().equals(timeRegistrationInList.getResource()) && 
+						timeRegistration.getWeek()==timeRegistrationInList.getWeek() && 
+						timeRegistration.getDay()==timeRegistrationInList.getDay()) {
+					indexResource =  getTimeRegistrationList().indexOf(timeRegistrationInList);
+					message = "Time registration is removed";
+				} else {
+					message = "No time registration found for this user on that time";
+				}
 			}
+			
+			timeregistrationlist.remove(indexResource);
+		} else {
+			message = "No time registrations made";
 		}
-
-		timeregistrationlist.remove(indexResource);
+		
+		return message;
 	}
 	
 	//Author: Mohaiman Rahim, S174120
@@ -148,36 +207,50 @@ public class TimeRegApp {
 		userspecialactivityregistrationlist.clear();
 	}
 	
-	//Author: Mohaiman Rahim, S174120
-	public void changeSpecialActivityRegistration(SpecialActivityRegistration specialActivityRegistration) throws Exception {
-		for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
-			if(specialActivityRegistration.getResource().equals(specialActivityRegistrationInList.getResource()) &&
-					specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
-					specialActivityRegistration.getStartWeek().equals(specialActivityRegistrationInList.getStartWeek()) && 
-					specialActivityRegistration.getStartDay().equals(specialActivityRegistrationInList.getStartDay()) && 
-					specialActivityRegistration.getEndWeek().equals(specialActivityRegistrationInList.getEndWeek()) && 
-					specialActivityRegistration.getEndDay().equals(specialActivityRegistrationInList.getEndDay())) {
-				indexResource =  getSpecialActivityRegistrationList().indexOf(specialActivityRegistrationInList);
-			} else {
-				throw new Exception("No special activity registration found for this user on that time");
-			}
-		}
-		specialactivityregistrationlist.get(indexResource).setActivity(specialActivityRegistration.getActivity());
-		specialactivityregistrationlist.get(indexResource).setStartWeek(specialActivityRegistration.getStartWeek());
-		specialactivityregistrationlist.get(indexResource).setStartDay(specialActivityRegistration.getStartDay());
-		specialactivityregistrationlist.get(indexResource).setEndWeek(specialActivityRegistration.getEndWeek());
-		specialactivityregistrationlist.get(indexResource).setEndDay(specialActivityRegistration.getEndDay());		
-	}
+//	//Author: Mohaiman Rahim, S174120
+//	public void changeSpecialActivityRegistration(SpecialActivityRegistration specialActivityRegistration) throws Exception {
+//		for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
+//			if(specialActivityRegistration.getResource().equals(specialActivityRegistrationInList.getResource()) &&
+//					specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
+//					specialActivityRegistration.getStartWeek()==specialActivityRegistrationInList.getStartWeek() && 
+//					specialActivityRegistration.getStartDay()==specialActivityRegistrationInList.getStartDay() && 
+//					specialActivityRegistration.getEndWeek()==specialActivityRegistrationInList.getEndWeek() && 
+//					specialActivityRegistration.getEndDay()==specialActivityRegistrationInList.getEndDay()) {
+//				indexResource =  getSpecialActivityRegistrationList().indexOf(specialActivityRegistrationInList);
+//			} else {
+//				throw new Exception("No special activity registration found for this user on that time");
+//			}
+//		}
+//		
+//		if (specialActivityRegistration.getStartDay() > 7 || specialActivityRegistration.getStartDay() < 1
+//				|| specialActivityRegistration.getEndDay() > 7 || specialActivityRegistration.getEndDay() < 1) {
+//			throw new Exception("Day out of bounds");
+//		} else if (specialActivityRegistration.getStartWeek() > 52 || specialActivityRegistration.getStartWeek() < 1
+//				|| specialActivityRegistration.getEndWeek() > 52 || specialActivityRegistration.getEndWeek() < 1) {
+//			throw new Exception("Week out of bounds");
+//		} else if (specialActivityRegistration.getStartWeek()==specialActivityRegistration.getEndWeek() && 
+//				specialActivityRegistration.getStartDay() > specialActivityRegistration.getEndDay()) {
+//			throw new Exception("Start day is after end day");
+//		} else if (specialActivityRegistration.getStartWeek() > specialActivityRegistration.getEndWeek()) {
+//			throw new Exception("Start week is after end week");
+//		} else {
+//			specialactivityregistrationlist.get(indexResource).setActivity(specialActivityRegistration.getActivity());
+//			specialactivityregistrationlist.get(indexResource).setStartWeek(specialActivityRegistration.getStartWeek());
+//			specialactivityregistrationlist.get(indexResource).setStartDay(specialActivityRegistration.getStartDay());
+//			specialactivityregistrationlist.get(indexResource).setEndWeek(specialActivityRegistration.getEndWeek());
+//			specialactivityregistrationlist.get(indexResource).setEndDay(specialActivityRegistration.getEndDay());		
+//		}
+//	}
 	
 	//Author: Mohaiman Rahim, S174120
 	public void deleteSpecialActivityRegistration(SpecialActivityRegistration specialActivityRegistration) throws Exception {
 		for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
 			if(specialActivityRegistration.getResource().equals(specialActivityRegistrationInList.getResource()) && 
 					specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
-					specialActivityRegistration.getStartWeek().equals(specialActivityRegistrationInList.getStartWeek()) && 
-					specialActivityRegistration.getStartDay().equals(specialActivityRegistrationInList.getStartDay()) && 
-					specialActivityRegistration.getEndWeek().equals(specialActivityRegistrationInList.getEndWeek()) && 
-					specialActivityRegistration.getEndDay().equals(specialActivityRegistrationInList.getEndDay())) {
+					specialActivityRegistration.getStartWeek()==specialActivityRegistrationInList.getStartWeek() && 
+					specialActivityRegistration.getStartDay()==specialActivityRegistrationInList.getStartDay() && 
+					specialActivityRegistration.getEndWeek()==specialActivityRegistrationInList.getEndWeek() && 
+					specialActivityRegistration.getEndDay()==specialActivityRegistrationInList.getEndDay()) {
 				indexResource =  getSpecialActivityRegistrationList().indexOf(specialActivityRegistrationInList);
 			} else {
 				throw new Exception("No special activity registration found for this user on that time");
