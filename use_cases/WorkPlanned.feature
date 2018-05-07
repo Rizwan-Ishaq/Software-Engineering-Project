@@ -52,7 +52,6 @@ Feature: Create WorkPlanned
 		And an activity with projectId "18001" and actId "a" and budgethours "10" and startWeek "2" and endWeek "4"
 		And an activity with projectId "18001" and actId "b" and budgethours "10" and startWeek "2" and endWeek "4"
     And a resource with fullName "Stefan" and initials "SSA" and password "cocacola"
-    And a resource with fullName "Stefan" and initials "SSA" and password "cocacola"
     And I create newWorkPlanned with projectId "18001" and actId "a" and resource initials "SSA" and startWeek "1" and endWeek "2"
     And add newWorkPlanned to WorkPlannedList
     And I create newWorkPlannedtwo with projectId "18001" and actId "b" and resource initials "SSA" and startWeek "3" and endWeek "4"
@@ -63,7 +62,6 @@ Feature: Create WorkPlanned
 		And an activity with projectId "18001" and actId "a" and budgethours "10" and startWeek "2" and endWeek "4"
 		And an activity with projectId "18001" and actId "b" and budgethours "10" and startWeek "2" and endWeek "4"
     And a resource with fullName "Stefan" and initials "SSA" and password "cocacola"
-    And a resource with fullName "Stefan" and initials "SSA" and password "cocacola"
     And I create newWorkPlanned with projectId "18001" and actId "a" and resource initials "SSA" and startWeek "1" and endWeek "2"
     And add newWorkPlanned to WorkPlannedList
     And I create newWorkPlannedtwo with projectId "18001" and actId "b" and resource initials "SSA" and startWeek "2" and endWeek "3"
@@ -73,7 +71,6 @@ Feature: Create WorkPlanned
 		Given a project with name "a" and a project with name "b" exists
 		And an activity with projectId "18001" and actId "a" and budgethours "10" and startWeek "2" and endWeek "4"
 		And an activity with projectId "18001" and actId "b" and budgethours "10" and startWeek "2" and endWeek "4"
-    And a resource with fullName "Stefan" and initials "SSA" and password "cocacola"
     And a resource with fullName "Stefan" and initials "SSA" and password "cocacola"
     And I create newWorkPlanned with projectId "18001" and actId "a" and resource initials "SSA" and startWeek "2" and endWeek "3"
     And add newWorkPlanned to WorkPlannedList

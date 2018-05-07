@@ -9,7 +9,8 @@ import app_files.Project;
 
 public class TimeRegApp {
 
-	private boolean userLoggedIn = false;
+	public boolean userLoggedIn = false;
+	public int indexUsername;
 	public List<Resource> resourcelist = new ArrayList<>();
 	public List<Project> projectlist = new ArrayList<>();
 	public List<WorkPlanned> workplannedlist = new ArrayList<>();
@@ -29,16 +30,62 @@ public class TimeRegApp {
 
 	// testpurposes
 	Boolean standAloneTest = false;
-
+	
+	//Author: Rizwan Ali Ishaq
 	public boolean userLoggedIn() {
 		return userLoggedIn;
 	}
 
+	//Author: Rizwan Ali Ishaq
 	public void registerResource(Resource resource) throws Exception {
-		if (resourcelist.contains(resource)) {
-			throw new Exception("User is already registered");
+		boolean userExisting = false;
+		for (Resource currResource : resourcelist) {
+			if(currResource.getId().equals(resource.getId())) {
+				userExisting = true;
+				throw new Exception("User is already registered");
+			}
 		}
-		resourcelist.add(resource);
+		
+		if (userExisting == false) {
+			resourcelist.add(resource);
+		}
+	}
+	
+	//Author: Rizwan Ali Ishaq
+	public int getIndexUsername() {
+		return indexUsername;
+	}
+	
+	//Author: Rizwan Ali Ishaq
+	public boolean userLogin(String inputInitials, String inputPassword) {
+		boolean resourceListEmpty = false;
+		
+		if (resourcelist.isEmpty()) {											   //path 1
+			resourceListEmpty = true;
+			return resourceListEmpty;
+		}
+		
+		for (Resource resource : resourcelist) {
+			if(inputInitials.equals(resource.getId())) {						   //path 2
+				indexUsername = getResources().indexOf(resource);
+			} else {
+				return userLoggedIn();
+			}
+		}
+		
+		if (inputPassword.equals(resourcelist.get(indexUsername).getPassword())) { //path 3
+			userLoggedIn = true;
+			return userLoggedIn();
+		} else {
+			userLoggedIn = false;
+			return userLoggedIn;
+		}
+		
+	}
+	
+	//Author: Rizwan Ali Ishaq
+	public List<Resource> getResources() {
+		return resourcelist;
 	}
 	
 	//Author: Mohaiman Rahim, S174120
@@ -127,7 +174,12 @@ public class TimeRegApp {
 			
 			if (usertimeregistrationlist.size() > 0) {
 				message = "Time registration list for user is created";
-				Arrays.toString(usertimeregistrationlist.toArray());
+				for (TimeRegistration timeRegistrationInList : usertimeregistrationlist) {
+					System.out.println(timeRegistrationInList.getResource().getId() + " " 
+				+ timeRegistrationInList.getWeek() + " "
+				+ timeRegistrationInList.getDay() + " "
+				+ timeRegistrationInList.getHoursWorked());
+				}
 			} else {
 				message = "No time registrations found for this user";
 			}
