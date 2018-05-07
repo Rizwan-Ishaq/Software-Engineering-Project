@@ -13,7 +13,7 @@ public class TimeRegApp {
 	public List<Project> projectlist = new ArrayList<>();
 	public List<WorkPlanned> workplannedlist = new ArrayList<>();
 	public List<Activity> activitylist = new ArrayList<>();
-
+	public List<String> resourceidavailablelist = new ArrayList<>();
 	//StefanAndersen
 	public List getActivityList() {
 		return activitylist;
@@ -213,6 +213,30 @@ public class TimeRegApp {
 					+ work.getEndWeek());
 			System.out.println();
 		}
+	}
+	
+	public String resourcesAvailableInTimeFrame(int startWeek, int endWeek){
+		
+		
+		
+		for(int i = 0; i < workplannedlist.size(); i++){									//1
+			WorkPlanned WorkPlan = workplannedlist.get(i); 
+			
+			if(startWeek > WorkPlan.getEndWeek() || endWeek < WorkPlan.getStartWeek()) {	//2
+				
+				String resourceId = workplannedlist.get(i).getResourceId();
+				resourceidavailablelist.add(resourceId); 
+				return("Adding people to list");
+			} else {
+				return "Error: Nothing to find here";
+			}
+		}
+		for(int i = 0; i < resourceidavailablelist.size(); i++) {							//3
+			System.out.println(resourceidavailablelist.get(i));
+			
+			
+		}
+		return "Error: This isn't the place to be";
 	}
 
 }
