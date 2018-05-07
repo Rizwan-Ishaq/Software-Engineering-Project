@@ -3,22 +3,30 @@
 //Instructor: Professor Paul Fischer
 package app_files;
 
+import java.io.IOException;
+
 public class WorkPlanned {
 
+	private TimeRegApp timeRegApp;
 	private String activityId;
 	private String projectId;
 	private int startWeek;
 	private int endWeek;
-	private int resourceId;
+	private String resourceId;
 
-	public WorkPlanned(String activityId, String projectId, int startWeek, int endWeek, int resourceId) {
+	public WorkPlanned(
+			//TimeRegApp timeRegApp, 
+			
+			String projectId, String activityId, String resourceId, int startWeek, int endWeek) {
 
-		this.activityId = activityId;
+		//this.timeRegApp = timeRegApp;
+		// ----------------------------
+
 		this.projectId = projectId;
+		this.activityId = activityId;
 		this.startWeek = startWeek;
 		this.endWeek = endWeek;
 		this.resourceId = resourceId;
-
 	}
 
 	public String getActivityId() {
@@ -37,7 +45,7 @@ public class WorkPlanned {
 		return endWeek;
 	}
 
-	public int getResourceId() {
+	public String getResourceId() {
 		return resourceId;
 	}
 
