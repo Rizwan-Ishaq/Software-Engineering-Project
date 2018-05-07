@@ -1,6 +1,7 @@
 package app_files;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,6 +15,13 @@ public class TimeRegApp {
 	public List<WorkPlanned> workplannedlist = new ArrayList<>();
 	public List<Activity> activitylist = new ArrayList<>();
 	public List<String> resourceidavailablelist = new ArrayList<>();
+	public List<TimeRegistration> timeregistrationlist = new ArrayList<>();
+//	public List<SpecialActivityRegistration> specialactivityregistrationlist = new ArrayList<>();
+	public List<TimeRegistration> usertimeregistrationlist = new ArrayList<>();
+//	public List<SpecialActivityRegistration> userspecialactivityregistrationlist = new ArrayList<>();
+	private String message;
+	public int indexResource;
+	
 	//StefanAndersen
 	public List getActivityList() {
 		return activitylist;
@@ -32,6 +40,224 @@ public class TimeRegApp {
 		}
 		resourcelist.add(resource);
 	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public List<TimeRegistration> getTimeRegistrationList() {
+		return timeregistrationlist;
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+//		public List<SpecialActivityRegistration> getSpecialActivityRegistrationList() {
+//			return specialactivityregistrationlist;
+//	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public String registerTime(TimeRegistration timeRegistration) throws Exception {
+		if (timeRegistration.getDay() > 7 || timeRegistration.getDay() < 1) {
+			message = "Day out of bounds";
+		} else if (timeRegistration.getWeek() > 52 || timeRegistration.getWeek() < 1) {
+			message = "Week out of bounds";
+		} else if (timeRegistration.getHoursWorked() > 24 || timeRegistration.getHoursWorked() < 1) {
+			message = "Hours out of bounds";
+		} else {	
+			if (resourcelist.contains(timeRegistration.getResource())) {
+				if (timeregistrationlist.size() == 0) {
+					timeregistrationlist.add(timeRegistration);
+					message = "Time is registered";
+				} else {
+					for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
+						if(timeRegistration.getResource().equals(timeRegistrationInList.getResource()) && 
+								timeRegistration.getWeek()==timeRegistrationInList.getWeek() && 
+								timeRegistration.getDay()==timeRegistrationInList.getDay()) {
+							message = "Time registration already done for this user on that time";
+						} else {
+							timeregistrationlist.add(timeRegistration);
+							message = "Time is registered";
+						}
+					}
+				}
+			} else {
+				message = "User doesn't exist";
+			}
+		}
+		return message;
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+//		public void registerSpecialActivity(SpecialActivityRegistration specialActivityRegistration) throws Exception {
+//			if (specialActivityRegistration.getStartDay() > 7 || specialActivityRegistration.getStartDay() < 1
+//					|| specialActivityRegistration.getEndDay() > 7 || specialActivityRegistration.getEndDay() < 1) {
+//				throw new Exception("Day out of bounds");
+//			} else if (specialActivityRegistration.getStartWeek() > 52 || specialActivityRegistration.getStartWeek() < 1
+//					|| specialActivityRegistration.getEndWeek() > 52 || specialActivityRegistration.getEndWeek() < 1) {
+//				throw new Exception("Week out of bounds");
+//			} else if (specialActivityRegistration.getStartWeek()==specialActivityRegistration.getEndWeek() && 
+//					specialActivityRegistration.getStartDay() > specialActivityRegistration.getEndDay()) {
+//				throw new Exception("Start day is after end day");
+//			} else if (specialActivityRegistration.getStartWeek() > specialActivityRegistration.getEndWeek()) {
+//				throw new Exception("Start week is after end week");
+//			} else {
+//				if (resourcelist.contains(specialActivityRegistration.getResource())) {
+//					for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
+//						if(specialActivityRegistration.getResource().equals(specialActivityRegistrationInList.getResource()) &&
+//								specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
+//								specialActivityRegistration.getStartWeek()==specialActivityRegistrationInList.getStartWeek() && 
+//								specialActivityRegistration.getStartDay()==specialActivityRegistrationInList.getStartDay() && 
+//								specialActivityRegistration.getEndWeek()==specialActivityRegistrationInList.getEndWeek() && 
+//								specialActivityRegistration.getEndDay()==specialActivityRegistrationInList.getEndDay()) {
+//							throw new Exception("Special activity already exist for this user on these days");
+//						} else {
+//							specialactivityregistrationlist.add(specialActivityRegistration);
+//						}
+//					}
+//				} else {
+//					throw new Exception("User doesn't exist");
+//				}
+//			}
+//		}
+	
+	//Author: Mohaiman Rahim, S174120
+	public String getTimeRegistration(String initials) throws Exception {
+		if (timeregistrationlist.size() > 0) {
+			for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
+				if(initials.equals(timeRegistrationInList.getResource().getId())) {
+					usertimeregistrationlist.add(timeRegistrationInList);
+				}
+			}
+			
+			if (usertimeregistrationlist.size() > 0) {
+				message = "Time registration list for user is created";
+				Arrays.toString(usertimeregistrationlist.toArray());
+			} else {
+				message = "No time registrations found for this user";
+			}
+		} else {
+			message = "No time registrations made";
+		}
+		
+		usertimeregistrationlist.clear();
+		
+		return message;
+	}
+	
+	//Author: Mohaiman Rahim, S174120
+//	public String changeTimeRegistration(TimeRegistration timeRegistration) throws Exception {
+//		if (timeregistrationlist.size() > 0) {
+//			for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
+//				if(timeRegistration.getResource().equals(timeRegistrationInList.getResource()) && 
+//						timeRegistration.getWeek()==timeRegistrationInList.getWeek() && 
+//						timeRegistration.getDay()==timeRegistrationInList.getDay()) {
+//					indexResource =  getTimeRegistrationList().indexOf(timeRegistrationInList);
+//				} else {
+//					message = "No time registration found for this user on that time";
+//				}
+//			}
+//			
+//			if (timeRegistration.getDay() > 7 || timeRegistration.getDay() < 1) {
+//				message = "Day out of bounds";
+//			} else if (timeRegistration.getWeek() > 52 || timeRegistration.getWeek() < 1) {
+//				message = "Week out of bounds";
+//			} else if (timeRegistration.getHoursWorked() > 24 || timeRegistration.getHoursWorked() < 1) {
+//				message = "Hours out of bounds";
+//			} else {
+//				timeregistrationlist.get(indexResource).setHoursWorked(timeRegistration.getHoursWorked());
+//				message = "Time registration is changed";
+//			}
+//		} else {
+//			message = "No time registrations made";
+//		}
+//		
+//		return message;
+//	}
+	
+	//Author: Mohaiman Rahim, S174120
+	public String deleteTimeRegistration(TimeRegistration timeRegistration) throws Exception {
+		if (timeregistrationlist.size() > 0) {
+			for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
+				if(timeRegistration.getResource().equals(timeRegistrationInList.getResource()) && 
+						timeRegistration.getWeek()==timeRegistrationInList.getWeek() && 
+						timeRegistration.getDay()==timeRegistrationInList.getDay()) {
+					indexResource =  getTimeRegistrationList().indexOf(timeRegistrationInList);
+					message = "Time registration is removed";
+				} else {
+					message = "No time registration found for this user on that time";
+				}
+			}
+			
+			timeregistrationlist.remove(indexResource);
+		} else {
+			message = "No time registrations made";
+		}
+		
+		return message;
+	}
+
+	//Author: Mohaiman Rahim, S174120
+//	public void getSpecialActivityRegistration(String initials) throws Exception {
+//		for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
+//			if(initials.equals(specialActivityRegistrationInList.getResource())) {
+//				userspecialactivityregistrationlist.add(specialActivityRegistrationInList);
+//			} else {
+//				throw new Exception("No special activity registrations found for this user");
+//			}
+//		}
+//		
+//		Arrays.toString(userspecialactivityregistrationlist.toArray());
+//		userspecialactivityregistrationlist.clear();
+//	}
+	
+	//Author: Mohaiman Rahim, S174120
+//	public void changeSpecialActivityRegistration(SpecialActivityRegistration specialActivityRegistration) throws Exception {
+//		for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
+//			if(specialActivityRegistration.getResource().equals(specialActivityRegistrationInList.getResource()) &&
+//					specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
+//					specialActivityRegistration.getStartWeek()==specialActivityRegistrationInList.getStartWeek() && 
+//					specialActivityRegistration.getStartDay()==specialActivityRegistrationInList.getStartDay() && 
+//					specialActivityRegistration.getEndWeek()==specialActivityRegistrationInList.getEndWeek() && 
+//					specialActivityRegistration.getEndDay()==specialActivityRegistrationInList.getEndDay()) {
+//				indexResource =  getSpecialActivityRegistrationList().indexOf(specialActivityRegistrationInList);
+//			} else {
+//				throw new Exception("No special activity registration found for this user on that time");
+//			}
+//		}
+//		
+//		if (specialActivityRegistration.getStartDay() > 7 || specialActivityRegistration.getStartDay() < 1
+//				|| specialActivityRegistration.getEndDay() > 7 || specialActivityRegistration.getEndDay() < 1) {
+//			throw new Exception("Day out of bounds");
+//		} else if (specialActivityRegistration.getStartWeek() > 52 || specialActivityRegistration.getStartWeek() < 1
+//				|| specialActivityRegistration.getEndWeek() > 52 || specialActivityRegistration.getEndWeek() < 1) {
+//			throw new Exception("Week out of bounds");
+//		} else if (specialActivityRegistration.getStartWeek()==specialActivityRegistration.getEndWeek() && 
+//				specialActivityRegistration.getStartDay() > specialActivityRegistration.getEndDay()) {
+//			throw new Exception("Start day is after end day");
+//		} else if (specialActivityRegistration.getStartWeek() > specialActivityRegistration.getEndWeek()) {
+//			throw new Exception("Start week is after end week");
+//		} else {
+//			specialactivityregistrationlist.get(indexResource).setActivity(specialActivityRegistration.getActivity());
+//			specialactivityregistrationlist.get(indexResource).setStartWeek(specialActivityRegistration.getStartWeek());
+//			specialactivityregistrationlist.get(indexResource).setStartDay(specialActivityRegistration.getStartDay());
+//			specialactivityregistrationlist.get(indexResource).setEndWeek(specialActivityRegistration.getEndWeek());
+//			specialactivityregistrationlist.get(indexResource).setEndDay(specialActivityRegistration.getEndDay());		
+//		}
+//	}
+	
+	//Author: Mohaiman Rahim, S174120
+//	public void deleteSpecialActivityRegistration(SpecialActivityRegistration specialActivityRegistration) throws Exception {
+//		for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
+//			if(specialActivityRegistration.getResource().equals(specialActivityRegistrationInList.getResource()) && 
+//					specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
+//					specialActivityRegistration.getStartWeek()==specialActivityRegistrationInList.getStartWeek() && 
+//					specialActivityRegistration.getStartDay()==specialActivityRegistrationInList.getStartDay() && 
+//					specialActivityRegistration.getEndWeek()==specialActivityRegistrationInList.getEndWeek() && 
+//					specialActivityRegistration.getEndDay()==specialActivityRegistrationInList.getEndDay()) {
+//				indexResource =  getSpecialActivityRegistrationList().indexOf(specialActivityRegistrationInList);
+//			} else {
+//				throw new Exception("No special activity registration found for this user on that time");
+//			}
+//		}
+//
+//		specialactivityregistrationlist.remove(indexResource);
+//}
 
 	// StefanAndersen Test
 	/*
