@@ -4,15 +4,15 @@ package app_files;
 public class SpecialActivityRegistration {
 	
 	TimeRegApp timeRegApp = new TimeRegApp();
-	private Resource resource;
+	private String resource;
 	private String activity;
 	private String startWeek;
 	private String startDay;
 	private String endDay;
 	private String endWeek;
 	
-	public SpecialActivityRegistration(Resource resource, String activity, String startWeek, String endWeek, String startDay, String endDay) {
-		this.resource = resource;
+	public SpecialActivityRegistration(String initials, String activity, String startWeek, String endWeek, String startDay, String endDay) {
+		this.resource = initials;
 		this.setActivity(activity);
 		this.startWeek = startWeek;
 		this.endWeek = endWeek;
@@ -20,11 +20,11 @@ public class SpecialActivityRegistration {
 		this.endDay = endDay;
 	}
 
-	public Resource getResource() {
+	public String getResource() {
 		return resource;
 	}
 
-	public void setResource(Resource resource) {
+	public void setResource(String resource) {
 		this.resource = resource;
 	}
 	

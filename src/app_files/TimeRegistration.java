@@ -4,27 +4,27 @@ package app_files;
 public class TimeRegistration {
 	
 	TimeRegApp timeRegApp = new TimeRegApp();
-	private Resource resource;
+	private String resource;
 	private double hoursWorked;
 	private String week;
 	private String day;
 	
-	public TimeRegistration(Resource resource, String week, String day, double hoursWorked) {
-		this.resource = resource;
+	public TimeRegistration(String initials, String week, String day, int hoursWorked2) {
+		this.resource = initials;
 		this.week = week;
 		this.day = day;
-		this.hoursWorked = roundUp(hoursWorked);
+		this.hoursWorked = roundUp(hoursWorked2);
 	}
 	
 	public double roundUp(double x) {
 	    return Math.ceil(x * 2) / 2.0;
 	}
 	
-	public Resource getResource() {
+	public String getResource() {
 		return resource;
 	}
 
-	public void setResource(Resource resource) {
+	public void setResource(String resource) {
 		this.resource = resource;
 	}
 

@@ -55,7 +55,7 @@ public class TimeRegApp {
 	public void registerTime(TimeRegistration timeRegistration) throws Exception {
 		if (resourcelist.contains(timeRegistration.getResource())) {
 			for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
-				if(timeRegistration.getResource().getId().equals(timeRegistrationInList.getResource().getId()) && 
+				if(timeRegistration.getResource().equals(timeRegistrationInList.getResource()) && 
 						timeRegistration.getWeek().equals(timeRegistrationInList.getWeek()) && 
 						timeRegistration.getDay().equals(timeRegistrationInList.getDay())) {
 					throw new Exception("No time registration found for this user on that time");
@@ -72,7 +72,7 @@ public class TimeRegApp {
 	public void registerSpecialActivity(SpecialActivityRegistration specialActivityRegistration) throws Exception {
 		if (resourcelist.contains(specialActivityRegistration.getResource())) {
 			for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
-				if(specialActivityRegistration.getResource().getId().equals(specialActivityRegistrationInList.getResource().getId()) &&
+				if(specialActivityRegistration.getResource().equals(specialActivityRegistrationInList.getResource()) &&
 						specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
 						specialActivityRegistration.getStartWeek().equals(specialActivityRegistrationInList.getStartWeek()) && 
 						specialActivityRegistration.getStartDay().equals(specialActivityRegistrationInList.getStartDay()) && 
@@ -91,7 +91,7 @@ public class TimeRegApp {
 	//Author: Mohaiman Rahim, S174120
 	public void getTimeRegistration(String initials) throws Exception {
 		for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
-			if(initials.equals(timeRegistrationInList.getResource().getId())) {
+			if(initials.equals(timeRegistrationInList.getResource())) {
 				usertimeregistrationlist.add(timeRegistrationInList);
 			} else {
 				throw new Exception("No time registrations found for this user");
@@ -105,7 +105,7 @@ public class TimeRegApp {
 	//Author: Mohaiman Rahim, S174120
 	public void changeTimeRegistration(TimeRegistration timeRegistration) throws Exception {
 		for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
-			if(timeRegistration.getResource().getId().equals(timeRegistrationInList.getResource().getId()) && 
+			if(timeRegistration.getResource().equals(timeRegistrationInList.getResource()) && 
 					timeRegistration.getWeek().equals(timeRegistrationInList.getWeek()) && 
 					timeRegistration.getDay().equals(timeRegistrationInList.getDay())) {
 				indexResource =  getTimeRegistrationList().indexOf(timeRegistrationInList);
@@ -122,7 +122,7 @@ public class TimeRegApp {
 	//Author: Mohaiman Rahim, S174120
 	public void deleteTimeRegistration(TimeRegistration timeRegistration) throws Exception {
 		for (TimeRegistration timeRegistrationInList : timeregistrationlist) {
-			if(timeRegistration.getResource().getId().equals(timeRegistrationInList.getResource().getId()) && 
+			if(timeRegistration.getResource().equals(timeRegistrationInList.getResource()) && 
 					timeRegistration.getWeek().equals(timeRegistrationInList.getWeek()) && 
 					timeRegistration.getDay().equals(timeRegistrationInList.getDay())) {
 				indexResource =  getTimeRegistrationList().indexOf(timeRegistrationInList);
@@ -137,7 +137,7 @@ public class TimeRegApp {
 	//Author: Mohaiman Rahim, S174120
 	public void getSpecialActivityRegistration(String initials) throws Exception {
 		for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
-			if(initials.equals(specialActivityRegistrationInList.getResource().getId())) {
+			if(initials.equals(specialActivityRegistrationInList.getResource())) {
 				userspecialactivityregistrationlist.add(specialActivityRegistrationInList);
 			} else {
 				throw new Exception("No special activity registrations found for this user");
@@ -151,7 +151,7 @@ public class TimeRegApp {
 	//Author: Mohaiman Rahim, S174120
 	public void changeSpecialActivityRegistration(SpecialActivityRegistration specialActivityRegistration) throws Exception {
 		for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
-			if(specialActivityRegistration.getResource().getId().equals(specialActivityRegistrationInList.getResource().getId()) &&
+			if(specialActivityRegistration.getResource().equals(specialActivityRegistrationInList.getResource()) &&
 					specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
 					specialActivityRegistration.getStartWeek().equals(specialActivityRegistrationInList.getStartWeek()) && 
 					specialActivityRegistration.getStartDay().equals(specialActivityRegistrationInList.getStartDay()) && 
@@ -172,7 +172,7 @@ public class TimeRegApp {
 	//Author: Mohaiman Rahim, S174120
 	public void deleteSpecialActivityRegistration(SpecialActivityRegistration specialActivityRegistration) throws Exception {
 		for (SpecialActivityRegistration specialActivityRegistrationInList : specialactivityregistrationlist) {
-			if(specialActivityRegistration.getResource().getId().equals(specialActivityRegistrationInList.getResource().getId()) && 
+			if(specialActivityRegistration.getResource().equals(specialActivityRegistrationInList.getResource()) && 
 					specialActivityRegistration.getActivity().equals(specialActivityRegistrationInList.getActivity()) && 
 					specialActivityRegistration.getStartWeek().equals(specialActivityRegistrationInList.getStartWeek()) && 
 					specialActivityRegistration.getStartDay().equals(specialActivityRegistrationInList.getStartDay()) && 
