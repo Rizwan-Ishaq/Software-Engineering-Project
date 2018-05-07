@@ -110,7 +110,7 @@ public class StartScreen extends Screen {
 
 			Resource newResource = new Resource(resourceName, resourceInitials, resourcePassword);
 
-			timeRegUI.getTimeRegApp().addResource(newResource);
+			timeRegUI.getTimeRegApp().registerResource(newResource);
 
 			System.out.println("Ok");
 		}

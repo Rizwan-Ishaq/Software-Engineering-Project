@@ -129,7 +129,7 @@ public class TimeRegApp {
 	// StefanAndersen
 	public Project getProject(String projectId) {
 		// Method returns project object if exists or else Null
-		System.out.println("x004");
+		//System.out.println("x004");
 
 		if (standAloneTest) {
 			if (projectId.substring(0, 1).equals("A")) {
@@ -141,7 +141,7 @@ public class TimeRegApp {
 
 		} else {
 			for (int i = 0; i < projectlist.size(); i++) {
-				System.out.println("x003");
+			//	System.out.println("x003");
 				if (projectlist.get(i).getId().equals(projectId)) {
 					return projectlist.get(i);
 				}
@@ -165,7 +165,7 @@ public class TimeRegApp {
 			}
 
 		} else {
-			System.out.println("x001 " + projectId + " " + activityId);
+			//System.out.println("x001 " + projectId + " " + activityId);
 			for (int i = 0; i < activitylist.size(); i++) {
 				System.out.println(activitylist.get(i).getActId() + " " + activitylist.get(i).getProjId());
 				if (activitylist.get(i).getActId().equals(activityId)

@@ -71,15 +71,15 @@ public class testWorkPlanned {
 
 	@Test // test1
 	public void testAddWorkplannedWithNonExistingProject() {
-		System.out.println("Test 001");
+		//System.out.println("Test 001");
 
-		for (int i = 0; i < getTimeRegApp().projectlist.size(); i++) {
+		/*for (int i = 0; i < getTimeRegApp().projectlist.size(); i++) {
 
 			Project currentProject = getTimeRegApp().projectlist.get(i);
 
 			System.out.println(currentProject.getId() + " " + currentProject.getName());
 
-		}
+		}*/
 		WorkPlanned newWorkPlanned = new WorkPlanned("19001", "irrelevant", "irrelevant", 00, 00);
 
 		String output = getTimeRegApp().addWorkPlanned(newWorkPlanned);
@@ -89,7 +89,7 @@ public class testWorkPlanned {
 
 	@Test // test2
 	public void testAddWorkplannedWithNonExistingActivity() {
-		System.out.println("Test 002");
+		//System.out.println("Test 002");
 		// System.out.println("8888");
 		/*
 		 * for (int i = 0; i < getTimeRegApp().projectlist.size(); i++) {
@@ -111,7 +111,7 @@ public class testWorkPlanned {
 	@Test // test3
 	public void testAddWorkplannedWithExistingActivityDoesNotPointToProject() {
 
-		System.out.println("Test 003");
+		//System.out.println("Test 003");
 
 		WorkPlanned newWorkPlanned = new WorkPlanned("18001", "b", "irrelevant", 00, 00);
 
@@ -123,7 +123,7 @@ public class testWorkPlanned {
 	@Test // test4
 	public void testAddWorkplannedWithNonExistingResource() {
 
-		System.out.println("Test 004");
+		//System.out.println("Test 004");
 
 		WorkPlanned newWorkPlanned = new WorkPlanned("18001", "a", "SAS", 00, 00);
 
@@ -135,7 +135,7 @@ public class testWorkPlanned {
 	@Test // test5
 	public void testAddWorkplannedProjectEndsBeforeStarts() {
 
-		System.out.println("Test 005");
+	//System.out.println("Test 005");
 
 		WorkPlanned newWorkPlanned = new WorkPlanned("18001", "a", "SSA", 20, 10);
 
@@ -159,7 +159,7 @@ public class testWorkPlanned {
 	@Test // test7
 	public void testAddWorkplannedScheduledWorkhasbeenAddedNonExistingSimilarResourceId() {
 
-		System.out.println("Test 007");
+		//System.out.println("Test 007");
 
 		WorkPlanned newWorkPlanned = new WorkPlanned("18001", "a", "ASS", 10, 20);
 
@@ -171,7 +171,7 @@ public class testWorkPlanned {
 	@Test // test8
 	public void testAddWorkplannedScheduledWorkHasBeenAddedNoSimilarResourceIdInWorkPlanned() {
 
-		System.out.println("Test 008");
+		//System.out.println("Test 008");
 
 		WorkPlanned newWorkPlanned2 = new WorkPlanned("18001", "a", "SSA", 01, 05);
 		getTimeRegApp().addWorkPlanned(newWorkPlanned2);
@@ -186,7 +186,7 @@ public class testWorkPlanned {
 	@Test // test9
 	public void testAddWorkplannedScheduledWorkHasBeenAddedSimilarInititalsNoOverlapOfTime() {
 
-		System.out.println("Test 009");
+		//System.out.println("Test 009");
 
 		WorkPlanned newWorkPlanned2 = new WorkPlanned("18001", "a", "SSA", 01, 05);
 		getTimeRegApp().addWorkPlanned(newWorkPlanned2);
@@ -201,7 +201,7 @@ public class testWorkPlanned {
 	@Test // test10
 	public void testAddWorkplannedScheduledWorkHasNotBeenAddedSimilarInitialsOverlappingTimeFrame() {
 
-		System.out.println("Test 010");
+		//System.out.println("Test 010");
 
 		WorkPlanned newWorkPlanned2 = new WorkPlanned("18001", "a", "SSA", 01, 05);
 		getTimeRegApp().addWorkPlanned(newWorkPlanned2);
