@@ -40,6 +40,10 @@ public class StartScreen extends Screen {
 		out.println("RegisterTime <Initials> <Week> <Day> <HoursWorked>					(-> OK)");
 		out.println("GetTimeRegistration <Initials>								(-> OK)");
 		out.println("DeleteTimeRegistration <Initials> <Week> <Day> <HoursWorked>				(-> OK)");
+//		out.println("RegisterSpecialActivity <Initials> <Activity> <StartWeek> <EndWeek> <StartDay> <EndDay>		(-> OK)");
+//		out.println("GetSpecialActivityRegistration <Initials>						(-> OK)");
+//		out.println("ChangeSpecialActivityRegistration <Initials> <Activity> <StartWeek> <EndWeek> <StartDay> <EndDay>	(-> OK)");
+//		out.println("DeleteSpecialActivityRegistration <Initials> <Activity> <StartWeek> <EndWeek> <StartDay> <EndDay>	(-> OK)");
 		System.out.println("Implemented for testing. Not all commands implemented");
 		out.println("Exit");
 		out.println("Enter Command xx:");
@@ -245,6 +249,44 @@ public class StartScreen extends Screen {
 					timeRegUI.getTimeRegApp().deleteTimeRegistration(timeRegistration);
 				} catch (Exception e) { }
 			}
+			
+//			//Author: Mohaiman Rahim, S174120
+//			if ("RegisterSpecialActivity".equals(command)) {
+//				handled = true;
+//				
+//				String initials = Tokens[1];
+//				String activity = Tokens[2];
+//				String startWeek = Tokens[3];
+//				String endWeek = Tokens[4];
+//				String startDay = Tokens[5];
+//				String endDay = Tokens[6];
+	
+//				SpecialActivityRegistration specialActivityRegistration = new SpecialActivityRegistration(initials, activity, startWeek, endWeek, startDay, endDay);
+//				try {
+//					timeRegUI.getTimeRegApp().registerSpecialActivity(specialActivityRegistration);
+//				} catch (Exception e) {
+//				}
+//				
+//				System.out.println("Ok");
+//			}
+	
+//			//Author: Mohaiman Rahim, S174120
+//			if ("GetTimeRegistration".equals(command)) {
+//				handled = true;				
+//			}
+		
+//			//Author: Mohaiman Rahim, S174120
+//			if ("GetSpecialActivityRegistration".equals(command)) {
+//				handled = true;
+			
+//			//Author: Mohaiman Rahim, S174120
+//			if ("ChangeSpecialActivityRegistration".equals(command)) {
+//				handled = true;
+//			}
+			
+//			//Author: Mohaiman Rahim, S174120
+//			if ("DeleteSpecialActivityRegistration".equals(command)) {
+//				handled = true;
 		}	
 		
 		// StefanAndersen
